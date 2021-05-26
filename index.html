@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Title</title>
+    <style>
+        .avatar {
+            vertical-align: middle;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+    </style>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid .pt-3">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Homnayangi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./sodu.html">SoDu</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">ChiTiet</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">KiCuu</a>
+                </li>
+            </ul>
+        </nav>
+        <section class="container-fluid mt-5">
+            <div id="intent1">
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        <label for="date">Ngay:</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input id="datePicker" type="date" name="datePicker"
+                               onchange="console.log(this.value);" />
+                    </div>
+                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        <label for="date">Tham gia:<span id="total">0</span></label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row" id="addon">
+
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <input type="button" id="addid" value="+" onclick="newmem()" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3">
+                        <label for="date">Them nguoi Tham gia: </label>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="row" id="addout">
+                        </div>
+                    </div>
+                </div>
+                <div id="addnew" style="display:none">
+                    <hr />
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>Ten:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="txtName" type="text" onchange="console.log(this.value);" />
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>Gioi Tinh:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="radio" id="male" name="gender" value="male" checked="checked">
+                            <label for="male">Nam</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Nu</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="button" value="Them" onclick="addnewmem()" />
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <input type="button" value="Nhap Hoa Don" onclick="nhaphoadon()" />
+                </div>
+            </div>
+            <div id="intent2" style="display:none">
+                <div>
+                    <input type="button" value="Quay lai" onclick="back1()" />
+                    <input type="button" value="Tong Ket" onclick="Sum()" />
+                </div>
+                <h4>
+                    Hoa don ngay <span id="ngay"></span>
+                </h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ten</th>
+                            <th>Mua gi</th>
+                            <th>Gia</th>
+                            <th>Xoa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banggia">
+                    </tbody>
+                </table>
+                <hr />
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        Tong:
+                    </div>
+                    <div class="col-sm-9">
+                        <span id="tong">0</span>
+                    </div>
+                </div>
+                <hr />
+                <div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>Ten:</label>
+                        </div>
+                        <div class="col-sm-9" id="select">
+                            <!--<input id="txtName" type="text" onchange="console.log(this.value);" />-->
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>hoadon:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="txtHoadon" type="text" onchange="console.log(this.value);" />
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>gia:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="txtGia" type="number" onchange="console.log(this.value);" />
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-9">
+                            <input type="button" value="Them" onclick="Them()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="intent3" style="display:none">
+                <div>
+                    <input type="button" value="Quay lai" onclick="back2()" />
+                </div>
+                <h4>
+                    Hoa don ngay <span id="ngay2"></span>
+                </h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Ten</th>
+                            <th>Tien Chi</th>
+                            <th>Tien Tong Ket</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banggia2">
+                    </tbody>
+                </table>
+                <div>
+                    Trung binh: <span id="binhquan"></span>
+                </div>
+                <hr />
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        <input type="button" value="Tinh Nhanh" onclick="TinhNhanh(this)" />
+                        <input type="button" value="Dac Biet" onclick="DacBiet(this)" />
+                    </div>
+                </div>
+                <hr />
+                <div id="tinhnhanh" style="display:none">
+                    <span id="tongcacu">0</span>
+                    <hr />
+                    <div class="row" id="addon2">
+
+                    </div>
+                    <hr />
+                    <div class="row" id="addout2">
+
+                    </div>
+                </div>
+                <div id="dacbiet" style="display:none">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ten</th>
+                                <th>Tien Thiet Lap</th>
+                                <th>Xoa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banggia3">
+                        </tbody>
+                    </table>
+                    <hr />
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>Ten:</label>
+                        </div>
+                        <div class="col-sm-9" id="select">
+                            <div id="select2"></div>
+                            <!--<input id="txtName" type="text" onchange="console.log(this.value);" />-->
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-sm-3">
+                            <label>Tien Thiet Lap:</label>
+                        </div>
+                        <div class="col-sm-9">
+                            <input id="txtGia2" type="number" onchange="console.log(this.value);" />
+                        </div>
+                    </div>
+                    <div>
+                        <input type="button" value="Them" onclick="Themdb()" />
+                        <input type="button" value="Tong Ket" onclick="SumDB()" />
+                    </div>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Ten</th>
+                                <th>Tien Chi</th>
+                                <th>Tien Tong Ket</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banggia4">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        var count = 0;
+        var counttb = 0;
+        var counttb2 = 0;
+        var arrname = [];
+        var currentObjUser = {};
+        var currentDate = { ngay: "",person:[{ ID: 0, chitiet: [{hoadon:"",gia:0}], tong: 0 }], tong: 0}
+        var list = [];
+        var obj = null;
+        $(document).ready(function () {
+            var storage = localStorage.getItem('UserDB');
+            if (!storage) {
+                var UserDB = [{ ID: 0, name: "Linh", gender: 0, isBoss: 1 }, { ID: 1, name: "Canh", gender: 1, isBoss: 1 }, { ID: 2, name: "Tan", gender: 1, isBoss: 1 }];
+                localStorage.setItem('UserDB', JSON.stringify(UserDB));
+                storage = localStorage.getItem('UserDB');
+            }
+            obj = JSON.parse(storage);
+            count = obj.length;
+            obj.forEach((val,i) => {
+                var b = $(`<div class="col-sm-1" id="member${++i}" onclick="add(this);">`);
+                var c = $('<div class="row">');
+                var d = $(`<img src="img/${val.gender == "1" ? "avatar" : "avatar2"}.png" alt="Avatar" class="avatar">`);
+                var e = $('<div class="row">');
+                var f = $(`<span>${val.name}</span>`);
+                c.append(d);
+                e.append(f);
+                b.append(c, e);
+                $("#addout").append(b);
+            })
+            //console.log(new Date().toJSON().slice(0, 10).replace(/-/g, '/'))
+            $('#datePicker').val(new Date().toJSON().slice(0, 10));
+        });
+        const add = (ele) => {
+            //alert(ele.id)
+            var e = $("#" + ele.id);
+            var index = ele.id.match(/\d{1,999}/);
+            var ind = Number(index[0]) - 1;
+            //var x = obj.filter(val => val.ID == ind)[0];
+            if (e.parent().attr('id') == 'addon') {//xoa
+                if (ele.id.includes('memberadd')) {
+                    e.remove();
+                    count--;
+                } else {
+                    $("#addout").append(e);
+                }
+                list = list.filter((val) => val.ID != ind);
+                var c = list.length; 
+                $("#total").text(c);
+            } else {//them
+                $("#addon").append(e);
+                var x = obj.filter(val => val.ID == ind)[0];
+                list.push(x);
+                var c = list.length; 
+                $("#total").text(c);
+            }
+            console.log(list)
+        }
+        const newmem = () => {
+            if ($('#addid').val() == "+") {
+                $('#addid').val('-');
+                $('#addnew').css("display", 'block');
+            } else {
+                $('#addid').val('+');
+                $('#addnew').css("display", 'none');
+            }
+        }
+
+        const addnewmem = () => {
+            if ($('#txtName').val() != '') {
+                var radioValue = $("input[name='gender']:checked").val();
+                var gender = radioValue == 'male' ? 'avatar' : 'avatar2';
+                var b = $(`<div class="col-sm-1" id="memberadd${count+1}" onclick="add(this);">`);
+                var c = $('<div class="row">');
+                var d = $(`<img src="img/${gender}.png" alt="Avatar" class="avatar">`);
+                var e = $('<div class="row">');
+                var f = $('<span>' + $('#txtName').val() + '</span>');
+                c.append(d);
+                e.append(f);
+                b.append(c, e);
+                var genderi = radioValue == 'male' ? 1 : 0;
+                currentObjUser = { ID: count, name: $('#txtName').val(), gender: genderi, isBoss: 0 }
+                list.push(currentObjUser);
+                var c = list.length;
+                $("#total").text(c);
+                $("#addon").append(b);
+                $('#addid').val('+');
+                $('#txtName').val('');
+                $("#male").prop('checked', true);
+                $('#addnew').css("display", 'none');
+                count++;
+                //$("#total").text(Number($("#total").text()) + 1);
+            }
+        }
+        const nhaphoadon = () => {
+            if (list.length == 0) {
+                return;
+            }
+            $('#intent1').css("display", 'none');
+            $('#intent2').css("display", 'block');
+            $('#ngay').text($('#datePicker').val());
+            var sel = $('<select id="selecthd">').appendTo('#select');
+            list.forEach((val)=> {
+                sel.append($("<option>").attr('value', val.ID).text(val.name));
+            });
+            var per = [];
+            list.forEach((val) => {
+                var objper = {};
+                objper.ID = val.ID;
+                objper.chitiet = [];
+                objper.tong = 0;
+                per.push(objper);
+            })
+            currentDate = { ngay: $('#datePicker').val(), person: per, tong: 0 }
+        }
+        const back1 = () => {
+            $('#intent1').css("display", 'block');
+            $('#intent2').css("display", 'none');
+            $('#ngay').text('');
+            $('#select').empty();
+            $('#banggia').empty();
+            $('#tong').text('0');
+            currentDate = {}
+        }
+        const Them = () => {
+            if ($('#txtGia').val() == '') { return; }
+            var curtong = Number($("#tong").text());
+            var gia = Number($("#txtGia").val());
+            var indexhd = 0;
+            currentDate.person.forEach(y => {
+                if (y.ID == $("#selecthd option:selected").val()) {
+                    indexhd = y.chitiet.length;
+                    y.chitiet.push({hoadon: $("#txtHoadon").val(), gia: $("#txtGia").val() })
+                    var t = Number(y.tong);
+                    var g = Number($("#txtGia").val());
+                    y.tong = t + g;
+                }
+            })
+            currentDate.tong = curtong + gia;
+            console.log(currentDate);
+            var a = $('#banggia');
+            var b = $(`<tr id="tr${counttb}"></tr>`);
+            var c = $(`<td>${$("#selecthd option:selected").text()}</td>`);
+            var d = $(`<td>${$("#txtHoadon").val()}</td>`);
+            var e = $(`<td id="td${counttb}">${$("#txtGia").val()}</td>`);
+            var f = $(`<td><input type="button" value="Xoa" onclick="Delete(${counttb},${$('#selecthd option:selected').val()},${indexhd})" /></td>`);
+            counttb++;
+            b.append(c, d, e, f);
+            a.append(b);
+            $("#tong").text(curtong + gia);
+            $("#txtHoadon").val('');
+            $("#txtGia").val('');
+
+        }
+
+        const Delete = (i, id, idhd) => {
+            console.log(id)
+            var curtong = Number($("#tong").text());
+            var gia = Number($(`#td${i}`).text());
+            $("#tong").text(curtong - gia);
+            $(`#tr${i}`).remove();
+            currentDate.person.forEach(y => {
+                if (y.ID == id) {
+                    var g = y.chitiet[Number(idhd)].gia;
+                    var t = Number(y.tong);
+                    y.chitiet.splice(Number(idhd),1);
+                    y.tong = t - g;
+                }
+            })
+            currentDate.tong = curtong - gia;
+            console.log(currentDate);
+        }
+
+        const Sum = () => {
+            if ($("#tong").text() == '0') {
+                return;
+            }
+            $('#intent2').css("display", 'none');
+            $('#intent3').css("display", 'block');
+            $('#ngay2').text($('#datePicker').val());
+            var per = currentDate.tong / (list.length);
+            var a = $('#banggia2');
+            list.forEach((val) => {
+                var gia = 0;
+                currentDate.person.forEach(y => {
+                    if (y.ID == val.ID) {
+                        gia = Number(y.tong);
+                    }
+                })
+                var b = $(`<tr></tr>`);
+                var c = $(`<td>${val.name}</td>`);
+                var d = $(`<td>${gia}</td>`);
+                var e = $(`<td id="td2${counttb}">${per - gia}</td>`);
+                counttb++;
+                b.append(c, d, e);
+                a.append(b);
+            })
+            $('#binhquan').text(per);
+            list.forEach((val, i) => {
+                var b = $(`<div class="col-sm-1" id="member_${val.ID}" onclick="add2(this);">`);
+                var c = $('<div class="row">');
+                var d = $(`<img src="img/${val.gender == "1" ? "avatar" : "avatar2"}.png" alt="Avatar" class="avatar">`);
+                var e = $('<div class="row">');
+                var f = $(`<span>${val.name}</span>`);
+                c.append(d);
+                e.append(f);
+                b.append(c, e);
+                $("#addout2").append(b);
+            })
+            
+        }
+        const back2 = () => {
+            $('#intent2').css("display", 'block');
+            $('#intent3').css("display", 'none');
+            $('#ngay2').text('');
+            $('#banggia2').empty();
+            $("#addout2").empty();
+            $('#binhquan').text('');
+        }
+
+        const TinhNhanh = (e) => {
+            if (e.value == "Tinh Nhanh") {
+                e.value = "Huy";
+                $('#tinhnhanh').css("display", 'block');
+            } else {
+                e.value = "Tinh Nhanh";
+                $('#tinhnhanh').css("display", 'none');
+            }
+        }
+
+        const add2 = (ele) => {
+            //alert(ele.id)
+            var e = $("#" + ele.id);
+            var index = ele.id.match(/\d{1,999}/);
+            var ind = Number(index[0]);
+            var tong = Number($('#tongcacu').text())
+            //var x = obj.filter(val => val.ID == ind)[0];
+            var per = currentDate.tong / (list.length);
+            if (e.parent().attr('id') == 'addon2') {//xoa
+                $("#addout2").append(ele);
+                currentDate.person.forEach(y => {
+                    if (y.ID == ind) {
+                        var gia = Number(y.tong);
+                        $('#tongcacu').text(tong - (per - gia));
+                    }
+                })
+            } else {//them
+                $("#addon2").append(ele);
+                currentDate.person.forEach(y => {
+                    if (y.ID == ind) {
+                        var gia = Number(y.tong);
+                        $('#tongcacu').text(tong + (per - gia));
+                    }
+                })
+            }
+            console.log(list)
+        }
+        const DacBiet = (e) => {
+            
+            if (e.value == "Dac Biet") {
+                e.value = "Huy";
+                $('#dacbiet').css("display", 'block');
+                var con = $('#selecthd').html();
+                var sel = $('<select id="selectten">').appendTo('#select2');
+                sel.append($(con))
+            } else {
+                e.value = "Dac Biet";
+                $('#dacbiet').css("display", 'none');
+            }
+            
+        }
+        const Themdb = () => {
+            var x = arrname.indexOf($("#selectten option:selected").text());
+            if (x != -1) {
+                return;
+            }
+            var a = $('#banggia3');
+            var b = $(`<tr id="trdb${counttb2}"></tr>`);
+            var c = $(`<td id="tddb1${counttb2}">${$("#selectten option:selected").text()}</td>`);
+            var e = $(`<td id="tddb2${counttb2}">${$("#txtGia2").val()}</td>`);
+            var f = $(`<td><input type="button" value="Xoa" onclick="Delete2(${counttb2},'${$('#selectten option:selected').text()}',${$('#selectten option:selected').val()})" /></td>`);
+            counttb2++;
+            b.append(c, e, f);
+            a.append(b);
+            arrname.push($("#selectten option:selected").text())
+        }
+        const Delete2 = (id, text, val) => {
+            var x = arrname.indexOf(text);
+            arrname.splice(x, 1);
+            $(`#trdb${id}`).remove();
+        }
+    </script>
+</body>
+</html>
