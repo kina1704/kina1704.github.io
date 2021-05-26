@@ -275,7 +275,15 @@
         $(document).ready(function () {
             var storage = localStorage.getItem('UserDB');
             if (!storage) {
-                var UserDB = [{ ID: 0, name: "Linh", gender: 0, isBoss: 1 }, { ID: 1, name: "Canh", gender: 1, isBoss: 1 }, { ID: 2, name: "Tan", gender: 1, isBoss: 1 }];
+                var UserDB = [
+                    { ID: 0, name: "Linh", avatar: 'Linh.jpg', isBoss: 1 }
+                    , { ID: 1, name: "Canh", avatar: 'canh.jpg', isBoss: 1 }
+                    , { ID: 2, name: "Tan", avatar: 'tantan.jpg', isBoss: 1 }
+                    , { ID: 3, name: "Thang",avatar: 'Thang.jpg', isBoss: 1 }
+                    , { ID: 4, name: "Lun", avatar: 'lun.png', isBoss: 1 }
+                    , { ID: 5, name: "Hung", avatar: 'hung.png', isBoss: 1 }
+                    , { ID: 6, name: "Nam", avatar: 'nam.png', isBoss: 1 }
+                    , { ID: 7, name: "Thanh", avatar: 'thanh.png', isBoss: 1 }];
                 localStorage.setItem('UserDB', JSON.stringify(UserDB));
                 storage = localStorage.getItem('UserDB');
             }
@@ -284,7 +292,7 @@
             obj.forEach((val,i) => {
                 var b = $(`<div class="col-sm-1" id="member${++i}" onclick="add(this);">`);
                 var c = $('<div class="row">');
-                var d = $(`<img src="img/${val.gender == "1" ? "avatar" : "avatar2"}.png" alt="Avatar" class="avatar">`);
+                var d = $(`<img src="img/${val.avatar}" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
                 var f = $(`<span>${val.name}</span>`);
                 c.append(d);
@@ -442,7 +450,7 @@
             $('#intent2').css("display", 'none');
             $('#intent3').css("display", 'block');
             $('#ngay2').text($('#datePicker').val());
-            var per = currentDate.tong / (list.length);
+            var per = Math.round(currentDate.tong / (list.length));
             var a = $('#banggia2');
             list.forEach((val) => {
                 var gia = 0;
@@ -499,7 +507,7 @@
             var ind = Number(index[0]);
             var tong = Number($('#tongcacu').text())
             //var x = obj.filter(val => val.ID == ind)[0];
-            var per = currentDate.tong / (list.length);
+            var per = Math.round(currentDate.tong / (list.length));
             if (e.parent().attr('id') == 'addon2') {//xoa
                 $("#addout2").append(ele);
                 currentDate.person.forEach(y => {
