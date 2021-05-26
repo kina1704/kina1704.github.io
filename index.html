@@ -45,52 +45,46 @@
         <section class="container-fluid mt-5">
             <div id="intent1">
                 <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <label for="date">Ngay:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-9">
                         <input id="datePicker" type="date" name="datePicker"
                                onchange="console.log(this.value);" />
                     </div>
                 </div>
+                <hr />
+                <div>
+                    <input type="button" value="Nhap Hoa Don" onclick="nhaphoadon()" />
+                </div>
                 <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <label for="date">Tham gia:<span id="total">0</span></label>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-8">
                         <div class="row" id="addon">
 
                         </div>
                     </div>
-                    <div class="col-sm-1">
+                    <div class="col-1">
                         <input type="button" id="addid" value="+" onclick="newmem()" />
-                    </div>
-                </div>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-3">
-                        <label for="date">Them nguoi Tham gia: </label>
-                    </div>
-                    <div class="col-sm-8">
-                        <div class="row" id="addout">
-                        </div>
                     </div>
                 </div>
                 <div id="addnew" style="display:none">
                     <hr />
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>Ten:</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input id="txtName" type="text" onchange="console.log(this.value);" />
                         </div>
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>Gioi Tinh:</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input type="radio" id="male" name="gender" value="male" checked="checked">
                             <label for="male">Nam</label>
                             <input type="radio" id="female" name="gender" value="female">
@@ -98,16 +92,22 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input type="button" value="Them" onclick="addnewmem()" />
                         </div>
                     </div>
                 </div>
                 <hr />
-                <div>
-                    <input type="button" value="Nhap Hoa Don" onclick="nhaphoadon()" />
+                <div class="row">
+                    <div class="col-3">
+                        <label for="date">Them nguoi Tham gia: </label>
+                    </div>
+                    <div class="col-8">
+                        <div class="row" id="addout">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="intent2" style="display:none">
@@ -132,43 +132,43 @@
                 </table>
                 <hr />
                 <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         Tong:
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-9">
                         <span id="tong">0</span>
                     </div>
                 </div>
                 <hr />
                 <div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>Ten:</label>
                         </div>
-                        <div class="col-sm-9" id="select">
+                        <div class="col-9" id="select">
                             <!--<input id="txtName" type="text" onchange="console.log(this.value);" />-->
                         </div>
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>hoadon:</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input id="txtHoadon" type="text" onchange="console.log(this.value);" />
                         </div>
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>gia:</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input id="txtGia" type="number" onchange="console.log(this.value);" />
                         </div>
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input type="button" value="Them" onclick="Them()" />
                         </div>
                     </div>
@@ -197,7 +197,7 @@
                 </div>
                 <hr />
                 <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
+                    <div class="col-3">
                         <input type="button" value="Tinh Nhanh" onclick="TinhNhanh(this)" />
                         <input type="button" value="Dac Biet" onclick="DacBiet(this)" />
                     </div>
@@ -228,19 +228,19 @@
                     </table>
                     <hr />
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>Ten:</label>
                         </div>
-                        <div class="col-sm-9" id="select">
+                        <div class="col-9" id="select">
                             <div id="select2"></div>
                             <!--<input id="txtName" type="text" onchange="console.log(this.value);" />-->
                         </div>
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-sm-3">
+                        <div class="col-3">
                             <label>Tien Thiet Lap:</label>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-9">
                             <input id="txtGia2" type="number" onchange="console.log(this.value);" />
                         </div>
                     </div>
@@ -290,7 +290,7 @@
             obj = JSON.parse(storage);
             count = obj.length;
             obj.forEach((val,i) => {
-                var b = $(`<div class="col-sm-1" id="member${++i}" onclick="add(this);">`);
+                var b = $(`<div class="col-2" id="member${++i}" onclick="add(this);">`);
                 var c = $('<div class="row">');
                 var d = $(`<img src="img/${val.avatar}" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
@@ -342,7 +342,7 @@
             if ($('#txtName').val() != '') {
                 var radioValue = $("input[name='gender']:checked").val();
                 var gender = radioValue == 'male' ? 'avatar' : 'avatar2';
-                var b = $(`<div class="col-sm-1" id="memberadd${count+1}" onclick="add(this);">`);
+                var b = $(`<div class="col-2" id="memberadd${count+1}" onclick="add(this);">`);
                 var c = $('<div class="row">');
                 var d = $(`<img src="img/${gender}.png" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
@@ -351,7 +351,7 @@
                 e.append(f);
                 b.append(c, e);
                 var genderi = radioValue == 'male' ? 1 : 0;
-                currentObjUser = { ID: count, name: $('#txtName').val(), gender: genderi, isBoss: 0 }
+                currentObjUser = { ID: count, name: $('#txtName').val(), avatar: gender + ".png", isBoss: 0 }
                 list.push(currentObjUser);
                 var c = list.length;
                 $("#total").text(c);
@@ -469,9 +469,9 @@
             })
             $('#binhquan').text(per);
             list.forEach((val, i) => {
-                var b = $(`<div class="col-sm-1" id="member_${val.ID}" onclick="add2(this);">`);
+                var b = $(`<div class="col-2" id="member_${val.ID}" onclick="add2(this);">`);
                 var c = $('<div class="row">');
-                var d = $(`<img src="img/${val.gender == "1" ? "avatar" : "avatar2"}.png" alt="Avatar" class="avatar">`);
+                var d = $(`<img src="img/${val.avatar}" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
                 var f = $(`<span>${val.name}</span>`);
                 c.append(d);
