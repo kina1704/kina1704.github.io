@@ -52,7 +52,7 @@
                         <input type="button" value="Nhập hóa đơn" onclick="nhaphoadon()" />
                     </div>
                     <div class="row d-flex flex-row">
-                        <div class="col-3">
+                        <div class="col-2">
                             <label for="date">Tham gia: <span id="total">0</span></label>
                         </div>
                         <div class="col-8">
@@ -163,47 +163,63 @@
                             <div class="col-3">
                             </div>
                             <div class="col-9">
-                                <input type="button" value="Them" onclick="Them()" />
+                                <input type="button" value="Thêm" onclick="Them()" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="intent3" style="display:none">
-                    <div>
-                        <input type="button" value="Quay lai" onclick="back2()" />
-                    </div>
-                    <h4>
-                        Hóa đơn ngày <span id="ngay2"></span>
-                    </h4>
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Tên</th>
-                                <th>Tiền Chi</th>
-                                <th>Tiền Tổng Kết</th>
-                            </tr>
-                        </thead>
-                        <tbody id="banggia2">
-                        </tbody>
-                    </table>
-                    <div>
-                        Trung bình: <span id="binhquan"></span>
-                    </div>
-                    <hr />
                     <div class="row d-flex flex-row">
-                        <div class="col-3">
-                            <input type="button" value="Tinh Nhanh" onclick="TinhNhanh(this)" />
-                            <input type="button" value="Dac Biet" onclick="DacBiet(this)" />
+                        <div class="col-12">
+                            <input type="button" value="Quay lại" onclick="back2()" />
+                            <input type="button" value="Tính nhanh" id="btntinhnhanh" onclick="TinhNhanh(this)" />
+                            <input type="button" value="Đặc biệt" id="btndacbiet" onclick="DacBiet(this)" />
                         </div>
+                        <!-- <div class="col-4">
+                            <input type="button" value="Tính nhanh" id="btntinhnhanh" onclick="TinhNhanh(this)" />
+                        </div>
+                        <div class="col-4">
+                            <input type="button" value="Đặc biệt" id="btndacbiet" onclick="DacBiet(this)" />
+                        </div> -->
                     </div>
+                    <div id="tbtotal">
+                        <h4>
+                            Hóa đơn ngày <span id="ngay2"></span>
+                        </h4>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Tên</th>
+                                    <th>Tiền Chi</th>
+                                    <th>Tiền Tổng Kết</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="banggia2">
+                            </tbody>
+                        </table>
+                        <div>
+                            Trung bình: <span id="binhquan"></span>
+                        </div>
+                        <hr />
+                    </div>
+                    <!-- <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <input type="button" value="Tính nhanh" id="btntinhnhanh" onclick="TinhNhanh(this)" />
+                            <input type="button" value="Đặc biệt" id="btndacbiet" onclick="DacBiet(this)" />
+                        </div>
+                    </div> -->
                     <hr />
                     <div id="tinhnhanh" style="display:none">
-                        <span id="tongcacu">0</span>
+                        Tổng: <span id="tongcacu">0</span>
                         <hr />
+                        <span>Đã Chọn : </span>
                         <div class="row" id="addon2">
 
                         </div>
+                        
                         <hr />
+                        <span>Chọn : </span>
                         <div class="row" id="addout2">
 
                         </div>
@@ -239,8 +255,8 @@
                             </div>
                         </div>
                         <div>
-                            <input type="button" value="Them" onclick="Themdb()" />
-                            <input type="button" value="Tong Ket" onclick="SumDB()" />
+                            <input type="button" value="Thêm" onclick="Themdb()" />
+                            <input type="button" value="Tổng Kết" onclick="SumDB()" />
                         </div>
                         <table class="table table-bordered">
                             <thead>
@@ -248,6 +264,7 @@
                                     <th>Tên</th>
                                     <th>Tiền Chi</th>
                                     <th>Tiền Tổng Kết</th>
+                                    <th>Trạng thái</th>
                                 </tr>
                             </thead>
                             <tbody id="banggia4">
@@ -267,6 +284,7 @@
         var currentDate = { ngay: "",person:[{ ID: 0, chitiet: [{hoadon:"",gia:0}], tong: 0 }], tong: 0}
         var list = [];
         var obj = null;
+        var listdacbiet = [];
         $(document).ready(function () {
             var storage = localStorage.getItem('UserDB');
             if (!storage) {
@@ -284,10 +302,13 @@
                 storage = localStorage.getItem('UserDB');
             }
             obj = JSON.parse(storage);
-            count = obj.length;
+            var arr = [];
+            obj.forEach(x=>{arr.push(x.ID)});
+            var x = arr.sort();
+            count = x.length ==0 ? 0 : Number(x[x.length-1]) + 1;
             obj.forEach((val,i) => {
                 var ava = val.avatar.indexOf("data") == 0 ? val.avatar : `img/${val.avatar}`
-                var b = $(`<div class="col-2" id="member${++i}" onclick="add(this);">`);
+                var b = $(`<div class="col-2" id="member${val.ID}" onclick="add(this,${val.ID});">`);
                 var c = $('<div class="row">');
                 var d = $(`<img src="${ava}" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
@@ -300,25 +321,25 @@
             //console.log(new Date().toJSON().slice(0, 10).replace(/-/g, '/'))
             $('#datePicker').val(new Date().toJSON().slice(0, 10));
         });
-        const add = (ele) => {
+        const add = (ele, id) => {
             //alert(ele.id)
             var e = $("#" + ele.id);
-            var index = ele.id.match(/\d{1,999}/);
-            var ind = Number(index[0]) - 1;
+            // var index = ele.id.match(/\d{1,999}/);
+            // var ind = Number(index[0]) - 1;
             //var x = obj.filter(val => val.ID == ind)[0];
             if (e.parent().attr('id') == 'addon') {//xoa
                 if (ele.id.includes('memberadd')) {
                     e.remove();
-                    count--;
+                    // count--;
                 } else {
                     $("#addout").append(e);
                 }
-                list = list.filter((val) => val.ID != ind);
+                list = list.filter((val) => val.ID != id);
                 var c = list.length; 
                 $("#total").text(c);
             } else {//them
                 $("#addon").append(e);
-                var x = obj.filter(val => val.ID == ind)[0];
+                var x = obj.filter(val => val.ID == id)[0];
                 list.push(x);
                 var c = list.length; 
                 $("#total").text(c);
@@ -339,7 +360,7 @@
             if ($('#txtName').val() != '') {
                 var radioValue = $("input[name='gender']:checked").val();
                 var gender = radioValue == 'male' ? 'avatar' : 'avatar2';
-                var b = $(`<div class="col-2" id="memberadd${count+1}" onclick="add(this);">`);
+                var b = $(`<div class="col-2" id="memberadd${count}" onclick="add(this, ${count});">`);
                 var c = $('<div class="row">');
                 var d = $(`<img src="img/${gender}.png" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
@@ -347,7 +368,7 @@
                 c.append(d);
                 e.append(f);
                 b.append(c, e);
-                var genderi = radioValue == 'male' ? 1 : 0;
+                // var genderi = radioValue == 'male' ? 1 : 0;
                 currentObjUser = { ID: count, name: $('#txtName').val(), avatar: gender + ".png", isBoss: 0 }
                 list.push(currentObjUser);
                 var c = list.length;
@@ -460,8 +481,9 @@
                 var c = $(`<td>${val.name}</td>`);
                 var d = $(`<td>${gia}</td>`);
                 var e = $(`<td id="td2${counttb}">${per - gia}</td>`);
+                var g = $(`<td><input type="checkbox" id="cb${counttb}" value="Thanh toán"> <label for="cb${counttb}"> Thanh toán</label><br></td>`);
                 counttb++;
-                b.append(c, d, e);
+                b.append(c, d, e, g);
                 a.append(b);
             })
             $('#binhquan').text(per);
@@ -485,16 +507,24 @@
             $('#ngay2').text('');
             $('#banggia2').empty();
             $("#addout2").empty();
+            $("#addon2").empty();
+            $('#tongcacu').text('0');
             $('#binhquan').text('');
         }
 
         const TinhNhanh = (e) => {
-            if (e.value == "Tinh Nhanh") {
-                e.value = "Huy";
+            var x = document.getElementById('btndacbiet');
+            if (e.value == "Tính nhanh") {
+                e.value = "Hủy";
                 $('#tinhnhanh').css("display", 'block');
+                $('#dacbiet').css("display", 'none');
+                $('#tbtotal').css("display", 'none');
+                $('#select2').empty();
+                $('#btndacbiet').val('Đặc biệt');
             } else {
-                e.value = "Tinh Nhanh";
+                e.value = "Tính nhanh";
                 $('#tinhnhanh').css("display", 'none');
+                $('#tbtotal').css("display", 'table');
             }
         }
 
@@ -526,22 +556,32 @@
             console.log(list)
         }
         const DacBiet = (e) => {
-            
-            if (e.value == "Dac Biet") {
-                e.value = "Huy";
+            if (e.value == "Đặc biệt") {
+                e.value = "Hủy";
                 $('#dacbiet').css("display", 'block');
+                $('#tinhnhanh').css("display", 'none');
+                $('#tbtotal').css("display", 'none');
+                $('#btntinhnhanh').val("Tính nhanh");
+                $('#select2').empty();
                 var con = $('#selecthd').html();
                 var sel = $('<select id="selectten">').appendTo('#select2');
                 sel.append($(con))
             } else {
-                e.value = "Dac Biet";
+                e.value = "Đặc biệt";
                 $('#dacbiet').css("display", 'none');
+                $('#tbtotal').css("display", 'table');
             }
             
         }
         const Themdb = () => {
             var x = arrname.indexOf($("#selectten option:selected").text());
             if (x != -1) {
+                alert('Trùng tên rồi \n Chọn tên khác đi');
+                return;
+            }
+            var tien = Number($("#txtGia2").val());
+            if ($("#txtGia2").val() == '' || tien > currentDate.tong) {
+                alert('Cao hơn tiền tổng rồi');
                 return;
             }
             var a = $('#banggia3');
@@ -553,11 +593,50 @@
             b.append(c, e, f);
             a.append(b);
             arrname.push($("#selectten option:selected").text())
+            var obj = {};
+            obj.val = Number($('#selectten option:selected').val());
+            obj.tien = tien;
+            listdacbiet.push(obj);
         }
         const Delete2 = (id, text, val) => {
             var x = arrname.indexOf(text);
             arrname.splice(x, 1);
             $(`#trdb${id}`).remove();
+            var index = -1;
+            listdacbiet.forEach((val,i)=>{if(val.val == val) {index = i;}})
+            listdacbiet.splice(index,1);
+        }
+
+        const SumDB = ()=> {
+            var no = 0;
+            var tong = currentDate.tong;
+            var arrID = [];
+            listdacbiet.forEach((val)=>{
+                arrID.push(val.val);
+                tong = tong - val.tien;
+            })
+
+            var per = Math.round(tong / (list.length-listdacbiet.length));
+            var a = $('#banggia4');
+            a.empty();
+            console.log(arrID)
+            console.log(arrID.includes(0))
+            var x = list.filter(m=>!arrID.includes(m.ID))
+            x.forEach((val) => {
+                var gia = 0;
+                currentDate.person.forEach(y => {
+                    if (y.ID == val.ID) {
+                        gia = Number(y.tong);
+                    }
+                })
+                var b = $(`<tr></tr>`);
+                var c = $(`<td>${val.name}</td>`);
+                var d = $(`<td>${gia}</td>`);
+                var e = $(`<td>${per - gia}</td>`);
+                var g = $(`<td><input type="checkbox" id="cb${no}" value="Thanh toán"> <label for="cb${no}"> Thanh toán</label><br></td>`);
+                b.append(c, d, e, g);
+                a.append(b);
+            })
         }
     </script>
 </body>
