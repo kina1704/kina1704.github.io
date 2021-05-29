@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <p></p>
-                    <div class="row d-flex flex-row">
+                    <!-- <div class="row d-flex flex-row">
                         <div class="col-3">
                             <label>Chọn Avatar:</label>
                         </div>
@@ -76,6 +76,17 @@
                             <img src="./img/avatar.png" alt="Avatar" class="avatar" id="newavatar">
                         </div>
                         
+                    </div> -->
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Giới tính:</label>
+                        </div>
+                        <div class="col-9">
+                            <input type="radio" id="male" name="gender" value="male" checked="checked">
+                            <label for="male">Nam</label>
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Nữ</label>
+                        </div>
                     </div>
                     <p></p>
                     <div class="row d-flex flex-row">
@@ -186,10 +197,11 @@
             }
             var radioValue = $("input[name='gender']:checked").val();
             var vip = $("input[name='setvip']:checked").val();
-            // var gender = radioValue == 'male' ? 'avatar.png' : 'avatar2.png';
-            var gender = $("#newavatar").attr('src').includes("avatar")? "avatar.png":$("#newavatar").attr('src');
-            var newobj = { ID: newID, name: $('#txtName').val(), avatar: gender, isBoss: vip }
+            var gender = radioValue == 'male' ? 'avatar.png' : 'avatar2.png';
+            // var gender = $("#newavatar").attr('src').includes("avatar")? "avatar.png":$("#newavatar").attr('src');
+            var newobj = { ID: newID, name: $('#txtName').val(), avatar: `${gender}`, isBoss: vip }
             obj.push(newobj);
+            console.log(obj)
             localStorage.setItem('UserDB', JSON.stringify(obj));
             location.reload();
         }
@@ -205,6 +217,11 @@
 
         const readURL = (ele) => {
             var file = ele.files[0];
+            // if (file.size > 2097152) // 2 MiB for bytes.
+            // {
+            //     alert("Tạo file nhỏ thôi (dưới 2mb) \nChiều dài với chiều cao bằng nhau là đẹp \nChụp cái ảnh chỉnh sửa size rồi úp");
+            //     return;
+            // }
             getBase64(file).then(
                 data => {console.log(data);$("#newavatar").attr("src",data);}
             );
