@@ -380,10 +380,13 @@
                 $('#addnew').css("display", 'none');
                 count++;
                 //$("#total").text(Number($("#total").text()) + 1);
+            } else {
+                alert('Nhập tên vào đi cưng!');
             }
         }
         const nhaphoadon = () => {
             if (list.length == 0) {
+                alert('Chọn 1 người tham gia đi chứ!\nClick avatar hoặc nút [+]');
                 return;
             }
             $('#intent1').css("display", 'none');
@@ -413,7 +416,7 @@
             currentDate = {}
         }
         const Them = () => {
-            if ($('#txtGia').val() == '') { return; }
+            if ($('#txtGia').val() == '') {alert('Nhập số tiền đã mua đi nào!'); return; }
             var curtong = Number($("#tong").text());
             var gia = Number($("#txtGia").val());
             var indexhd = 0;
@@ -463,6 +466,7 @@
 
         const Sum = () => {
             if ($("#tong").text() == '0') {
+                alert('Không mua gì làm sao tính tổng?');
                 return;
             }
             $('#intent2').css("display", 'none');
