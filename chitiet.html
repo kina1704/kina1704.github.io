@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        .collapsing {
+        -webkit-transition: none;
+        transition: none;
+        display: none;
+}
+    </style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Chi tiết</title>
@@ -19,7 +26,12 @@
 </head>
 <body>
     <div class="container-fluid .pt-3">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
             <ul class="navbar-nav">
                 <li class="nav-item ">
                     <a class="nav-link" href="./index.html">Hôm Nay Ăn gì</a>
@@ -33,8 +45,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="./thanhvien.html">Thành viên</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./hangvn.html">Mua Hàng VN</a>
+                </li>
             </ul>
-        </nav>
+        </div>
         <section class="container-fluid mt-5">
             <div id="intent1">
                 <div class="row d-flex flex-row">

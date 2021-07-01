@@ -16,10 +16,17 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/constant.js"></script>
+    <script src="./js/common.js"></script>
 </head>
 <body>
     <div class="container-fluid .pt-3">
-        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="./index.html">Hôm Nay Ăn gì</a>
@@ -33,8 +40,11 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="">Thành viên</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./hangvn.html">Mua Hàng VN</a>
+                </li>
             </ul>
-        </nav>
+        </div>
         <section class="container-fluid mt-5">
             <div id="intent1">
                 <div>
@@ -115,23 +125,9 @@
 
         //khoi tao
         $(document).ready(function () {
-            var storage = localStorage.getItem('UserDB');
-            if (!storage) {
-                var UserDB = [
-                    //cmt
-                    { ID: 0, name: "Linh", avatar: 'Linh.jpg', isBoss: 1 }
-                    , { ID: 1, name: "Cảnh", avatar: 'canh.jpg', isBoss: 1 }
-                    , { ID: 2, name: "Tân", avatar: 'tantan.jpg', isBoss: 1 }
-                    , { ID: 3, name: "Thăng",avatar: 'Thang.jpg', isBoss: 1 }
-                    , { ID: 4, name: "Lùn", avatar: 'lun.png', isBoss: 1 }
-                    , { ID: 5, name: "Hùng", avatar: 'hung.png', isBoss: 1 }
-                    , { ID: 6, name: "Nam", avatar: 'nam.png', isBoss: 1 }
-                    , { ID: 7, name: "Thanh", avatar: 'thanh.png', isBoss: 1 }];
-                localStorage.setItem('UserDB', JSON.stringify(UserDB));
-                storage = localStorage.getItem('UserDB');
-            }
-            obj = JSON.parse(storage);
-            count = obj.length;
+            User.createNewUserDB();
+            var obj = User.getUserDB();
+            // count = obj.length;
             var a = $('#table');
             obj.forEach((val,i) => {
                 var ava = val.avatar.indexOf("data") == 0 ? val.avatar : `img/${val.avatar}`
@@ -148,13 +144,11 @@
         const Delete = (id, name) =>{
             var r = confirm(`Bạn có muốn xóa ${name} khỏi danh sách????`);
             if (r) {
-                var storage = localStorage.getItem('UserDB');
-                var obj = JSON.parse(storage);
-                var newarr = obj.filter(x=> x.ID != id);
-                localStorage.setItem('UserDB', JSON.stringify(newarr));
+                User.deleteUser(id);
+                var obj= User.getUserDB();
                 var a = $('#table');
                 a.empty();
-                newarr.forEach((val,i) => {
+                obj.forEach((val,i) => {
                     var isboss = val.isBoss==1 ? "true":"false";
                     var ava = val.avatar.indexOf("data") == 0 ? val.avatar : `img/${val.avatar}`
                     var b = $(`<tr></tr>`);
@@ -184,25 +178,10 @@
                 alert('Nhập tên đi bạn ơi!')
                 return;
             }
-            var storage = localStorage.getItem('UserDB');
-            var obj = JSON.parse(storage);
-            var newID = 0;
-            if(obj.length != 0) {
-                var currentID = obj.length;
-                var arr = [];
-                obj.forEach(x=>{arr.push(x.ID)});
-                var x = arr.sort();
-                newID = Number(x[x.length-1]) + 1;
-                console.log(newID);
-            }
             var radioValue = $("input[name='gender']:checked").val();
             var vip = $("input[name='setvip']:checked").val();
             var gender = radioValue == 'male' ? 'avatar.png' : 'avatar2.png';
-            // var gender = $("#newavatar").attr('src').includes("avatar")? "avatar.png":$("#newavatar").attr('src');
-            var newobj = { ID: newID, name: $('#txtName').val(), avatar: `${gender}`, isBoss: vip }
-            obj.push(newobj);
-            console.log(obj)
-            localStorage.setItem('UserDB', JSON.stringify(obj));
+            User.createNewUser($('#txtName').val(),`${gender}`,vip);
             location.reload();
         }
 

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mua hàng VN</title>
+    <link rel="stylesheet" href="./css/common.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="./js/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="./js/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/constant.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/hangvn.js"></script>
+</head>
+<body>
+    <div class="container-fluid .pt-3">
+        <nav class="navbar navbar-dark bg-dark">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="./index.html">Hôm Nay Ăn gì</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./sodu.html">Số dư</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./chitiet.html">Chi tiết</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./thanhvien.html">Thành viên</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="">Mua Hàng VN</a>
+                </li>
+            </ul>
+        </div>
+        <section class="container-fluid mt-5">
+            <div>
+                <input type="button" value="Tạo đơn hàng" onclick="createHD()" />
+                <input type="button" value="Xem list đơn hàng" onclick="viewHD()" />
+            </div>
+            <div id="intent1">
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        <label for="date">Ngày:</label>
+                    </div>
+                    <div class="col-sm-9">
+                        <input id="datePicker" type="date" name="datePicker"/>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row d-flex flex-row">
+                    <div class="col-3">
+                        <label>Tên hàng:</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="txtten" type="text"/>
+                    </div>
+                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-3">
+                        <label>Số lượng:</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="txtNo" type="number" value="1"/>
+                    </div>
+                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-3">
+                        <label>Giá từng đơn vị:</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="txtGia" type="number"/>
+                    </div>
+                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-3">
+                    </div>
+                    <div class="col-9">
+                        <input type="button" value="Thêm" onclick="Them()" />
+                    </div>
+                </div>
+                <hr/>
+                <div>
+                    <input type="button" value="Lưu đơn hàng" onclick="saveHD()" />
+                </div>
+                <div class="row d-flex flex-row">
+                    <div class="col-sm-3">
+                        <label for="date">Chọn người trả tiền:</label>
+                    </div>
+                    <div id="select"  class="col-sm-3">
+                    </div>
+                </div>
+                <hr/>
+                <div class="row d-flex flex-row">
+                    <div class="col-3">
+                        <label>Tên Hóa Đơn:</label>
+                    </div>
+                    <div class="col-9">
+                        <input id="namehd" type="text" value="Mua Hàng VN"/>
+                    </div>
+                </div>
+                <!-- <div>
+                    <label>Đơn hàng của:</label> <span id="ten"></span>
+                </div> -->
+                <div>
+                    <label>Tổng: </label> <span id="tong">0</span>
+                </div>
+                <table class="table table-bordered mt-1">
+                    <thead>
+                        <tr>
+                            <th>Mặt hàng</th>
+                            <th>Số lượng</th>
+                            <th>Giá</th>
+                            <th>Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banggia">
+                    </tbody>
+                </table>
+            </div>
+            <div id="intent2" style="display: none;">
+                <div id="contentchititet1">
+                    <div>Danh Sách Hóa Đơn hiện có</div>
+                    <table class="table table-bordered mt-1">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Tên HD</th>
+                                <th>Người Mua</th>
+                                <th>Chi tiết</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lichsu">
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="contentchititet2" style="display:none">
+                    <div><input type="button" value="Quay Lại" onclick="BacktoLS()"/></div>
+                    <input id="hiddenidhf" type="hidden">
+                    <div>Hoá đơn:<span id="ct_tenhd"></span></div>
+                    <div>Ngày:<span id="ct_date"></span></div>
+                    <div>Người Mua:<span id="ct_ten"></span></div>
+                    <table class="table table-bordered mt-1">
+                        <thead>
+                            <tr>
+                                <th>Mặt hàng</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Sửa Xóa</th>
+                            </tr>
+                            <tbody id="banggia2">
+                            </tbody>
+                        </thead>
+                    </table>
+                </div>
+                <div id="contentchititet3" style="display:none">
+                    <div><input type="button" value="Quay Lại" onclick="BacktoCT()"/></div>
+                    <input id="hiddenid" type="hidden">
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Mặt hàng:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txteditten" type="text"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Số lượng:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txteditNo" type="number"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Giá:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txteditGia" type="number"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-9">
+                            <input type="button" value="Lưu" onclick="LuuEdit()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        $(document).ready(function () {
+            Common.createSelect('select','selecthd');
+            $('#datePicker').val(new Date().toJSON().slice(0, 10));
+        });
+        const createHD = () =>{
+            var confirma = confirm("bạn có muốn tạo mới hóa đơn?");
+            if(!confirma) {return;}
+            $('#banggia').empty();
+            $('#txtten').val('');
+            $('#txtGia').val('');
+            $('#select').empty();
+            Common.createSelect('select','selecthd');
+            Common.Hienthi("intent1");
+            Common.An("intent2");
+            $('#tong').text("");
+        }
+
+        // --Lich su hoa don--
+        const viewHD = ()=> {
+            var a = $('#lichsu');
+            a.html('');
+            var hoadon = HangVN.getHoaDon();
+            if(hoadon != null) {
+                hoadon.forEach(v => {
+                    var b = $(`<tr id="tr_view_${v.id}"></tr>`);
+                    var c = $(`<td>${v.date}</td>`);
+                    var d = $(`<td>${v.ten}</td>`);
+                    var e = $(`<td>${v.person}</td>`);
+                    var f = $(`<td><input type="button" value="Xem" onclick="Chitiethd(${v.id})"/>&nbsp;<input type="button" value="Xóa" onclick="Delete('#tr_view_${v.id}',${v.id},'lichsu')" /></td>`);
+                    b.append(c, d, e, f);
+                    a.append(b);
+                });
+            }
+            Common.Hienthi("intent2");
+            Common.An("intent1");
+        }
+
+        const Chitiethd = (id)=> {
+            var hoadon = HangVN.getHoaDon();
+            var curhd = {};
+            hoadon.forEach((v) =>{
+                if(v.id == id) {
+                    curhd = v;
+                }
+            })
+            Common.Hienthi("contentchititet2");
+            Common.An("contentchititet1");
+            $("#hiddenidhf").val(id);
+            $("#ct_tenhd").text(curhd.ten);
+            $("#ct_date").text(curhd.date);
+            $("#ct_ten").text(curhd.person);
+            var a = $('#banggia2');
+            a.html('');
+            curhd.list.forEach(v=>{
+                var b = $(`<tr id="tr_bg2_${v.id}"></tr>`);
+                var c = $(`<td>${v.tenhang}</td>`);
+                var d = $(`<td>${v.soluong}</td>`);
+                var e = $(`<td>${v.gia}</td>`);
+                var f = $(`<td><input type="button" value="Sửa" onclick="Change('#tr_bg2_${v.id}',${v.id})" /><input type="button" value="Xóa" onclick="Delete('#tr_bg2_${v.id}',${v.id},'chitiet')" /></td>`);
+                b.append(c, d, e, f);
+                a.append(b);
+            })
+        }
+
+        const BacktoLS = ()=>{
+            Common.Hienthi("contentchititet1");
+            Common.An("contentchititet2");
+            $("#ct_tenhd").text('');
+            $("#ct_date").text('');
+            $("#ct_ten").text('');
+            $('#banggia2').html('');
+        }
+
+        const BacktoCT = ()=>{
+            Common.Hienthi("contentchititet2");
+            Common.An("contentchititet3");
+            $("#hiddenid").text('');
+            $("#txteditten").text('');
+            $("#txteditNo").text('');
+            $('#txteditGia').html('');
+        }
+
+        const Change = (id, no) =>{
+            Common.Hienthi("contentchititet3");
+            Common.An("contentchititet2");
+            $("#hiddenid").val(no);
+            $(id).find('td').each(function(i){
+                switch(i){
+                        case 0:
+                            $("#txteditten").val($(this).text());
+                            break;
+                        case 1:
+                            $("#txteditNo").val($(this).text());
+                            break;
+                        case 2:
+                            $("#txteditGia").val($(this).text());
+                            break;
+                    }
+            })
+        }
+        const LuuEdit = () =>{
+            var no = $("#hiddenid").val();
+            var id = `#tr_bg2_${no}`;
+            var obj = {};
+            obj.id = no;
+            obj.tenhang = $("#txteditten").val();
+            obj.soluong = $("#txteditNo").val();
+            obj.gia = $("#txteditGia").val();
+            if(obj.tenhang == "" || obj.soluong == "" || obj.gia == "") {
+                alert("Bạn vui lòng nhập thông tin vào!");
+                return;
+            }
+            // 
+            $(id).find('td').each(function(i){
+                switch(i){
+                        case 0:
+                            $(this).text(obj.tenhang);
+                            break;
+                        case 1:
+                            $(this).text(obj.soluong);
+                            break;
+                        case 2:
+                            $(this).text(obj.gia);
+                            break;
+                    }
+            });
+            HangVN.EditMatHang($("#hiddenidhf").val(),no,obj)
+            BacktoCT();
+        }
+        // --Lich su hoa don--
+
+        const Them = () => {
+            if($('#txtten').val() == "" || $('#txtNo').val() == "" || $('#txtGia').val() == "") {
+                alert("Bạn vui lòng nhập thông tin vào!");
+                return;
+            }
+           var tenhang = $('#txtten').val();
+           var soluong = Number($('#txtNo').val());
+           var gia = Number($('#txtGia').val());
+           var tong = Number($('#tong').text());
+        //    var id = $("#selecthd option:selected").val();
+        //    var ten = $("#selecthd option:selected").text();
+            var id = $('#banggia tr').length;
+            var a = $('#banggia');
+            var b = $(`<tr id="tr${id}"></tr>`);
+            var c = $(`<td>${tenhang}</td>`);
+            var d = $(`<td>${soluong}</td>`);
+            var e = $(`<td>${gia}</td>`);
+            var f = $(`<td><input type="button" value="Xóa" onclick="Delete('#tr${id}',${id})" /></td>`);
+            b.append(c, d, e, f);
+            a.append(b);
+            $('#tong').text(tong+(gia*soluong));
+            // $('#ten').text(ten);
+            $("#txtHoadon").val('');
+            $('#txtten').val('');
+            $('#txtNo').val('1');
+            $("#txtGia").val('');
+        }
+
+        const Delete = (id, idno , type = "") => {
+            var confirma = confirm("bạn có chắc chắn muốn xóa?");
+            if(!confirma) {return;}
+            $(id).remove();
+            var no = $("#hiddenidhf").val();
+            if(type == 'lichsu') {
+                HangVN.DelHoadon(idno);
+            } else if(type == 'chitiet') {
+                var x = HangVN.DelMatHang(no,idno);
+                console.log(x);
+                if(x == 0) {
+                    viewHD();
+                    BacktoLS();
+                }
+            }
+        }
+
+        const saveHD = () =>{
+            if($('#banggia tr').length == 0 || $("#namehd").val() == ""){
+                alert("Bạn vui lòng nhập thông tin vào!");
+                return;
+            }
+            var confirma = confirm("bạn có chắc chắn lưu hóa đơn này?");
+            if(!confirma) {return;}
+            var obj = {};
+            var hoadon = HangVN.getHoaDon();
+            if(hoadon != null) {
+                obj.id = HangVN.getNewId();
+            } else {
+                HangVN.createNewHoaDon();
+                hoadon = HangVN.getHoaDon();
+                obj.id = 0;
+            }
+            obj.date = $("#datePicker").val();
+            obj.ten = $("#namehd").val();
+            obj.person = $("#selecthd option:selected").text();
+            obj.list = [];
+            $("#banggia tr").each(function(i){
+                var objtd = {};
+                objtd.id = i;
+                $(this).find('td').each (function(j) {
+                    switch(j){
+                        case 0:
+                            objtd.tenhang = $(this).text();
+                            break;
+                        case 1:
+                            objtd.soluong = $(this).text();
+                            break;
+                        case 2:
+                            objtd.gia = $(this).text();
+                            break;
+                    }
+
+                });
+                obj.list.push(objtd);
+            })
+            console.log(JSON.stringify(obj));
+            hoadon.push(obj);
+            HangVN.setHoaDon(hoadon);
+            $("#banggia").html('');
+            $("#namehd").val('Mua Hàng VN');
+        }
+    </script>
+</body>
+</html>

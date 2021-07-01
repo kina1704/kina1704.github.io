@@ -16,11 +16,20 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/constant.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/index.js"></script>
+    <script src="./js/hangvn.js"></script>
 </head>
 <body class="body">
     <div class="wrapper">
         <div class="container-fluid .pt-3">
-            <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+            <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="nav-link" href="">Hôm Nay Ăn gì</a>
@@ -34,8 +43,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./thanhvien.html">Thành viên</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./hangvn.html">Mua Hàng VN</a>
+                    </li>
                 </ul>
-            </nav>
+            </div>
             <section class="container-fluid mt-5">
                 <div id="intent1">
                     <div class="row d-flex flex-row">
@@ -135,6 +147,10 @@
                     </div>
                     <hr />
                     <div>
+                        <input type="button" value="Hoá đơn lẻ" onclick="Hoadonle()"/>
+                        <input type="button" value="Hoá có sẵn" onclick="Hoadoncosan()"/>
+                    </div>
+                    <div id="hoadonle" style="padding-top: 20px;">
                         <div class="row d-flex flex-row">
                             <div class="col-3">
                                 <label>Tên:</label>
@@ -164,6 +180,44 @@
                             </div>
                             <div class="col-9">
                                 <input type="button" value="Thêm" onclick="Them()" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="hoadoncosan" style="padding-top: 20px;display: none;">
+                        <div class="row d-flex flex-row">
+                            <div class="col-3">
+                                <label>Tên Hóa đơn:</label>
+                            </div>
+                            <div class="col-9" id="selecthdcs">
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-3">
+                                <label>Tên mặt hàng:</label>
+                            </div>
+                            <div class="col-9" id="selecthdcs_mh">
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-3">
+                                <label>Số lượng:</label>
+                            </div>
+                            <div class="col-9" id="selecthdcs_sl">
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-3">
+                                <label>Giá:</label>
+                            </div>
+                            <div class="col-9" id="selecthdcs_sl">
+                                <label id="giahdcs"></label>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-3">
+                            </div>
+                            <div class="col-9">
+                                <input type="button" value="Thêm" onclick="HangVN.Themhdcs()" />
                             </div>
                         </div>
                     </div>
@@ -217,7 +271,6 @@
                         <div class="row" id="addon2">
 
                         </div>
-                        
                         <hr />
                         <span>Chọn : </span>
                         <div class="row" id="addout2">
@@ -276,75 +329,45 @@
         </div>
     </div>
     <script>
-        var count = 0;
-        var counttb = 0;
-        var counttb2 = 0;
-        var arrname = [];
-        var currentObjUser = {};
-        var currentDate = { ngay: "",person:[{ ID: 0, chitiet: [{hoadon:"",gia:0}], tong: 0 }], tong: 0}
-        var list = [];
-        var obj = null;
-        var listdacbiet = [];
         $(document).ready(function () {
-            var storage = localStorage.getItem('UserDB');
-            if (!storage) {
-                var UserDB = [
-                    //cmt
-                    { ID: 0, name: "Linh", avatar: 'Linh.jpg', isBoss: 1 }
-                    , { ID: 1, name: "Cảnh", avatar: 'canh.jpg', isBoss: 1 }
-                    , { ID: 2, name: "Tân", avatar: 'tantan.jpg', isBoss: 1 }
-                    , { ID: 3, name: "Thăng",avatar: 'Thang.jpg', isBoss: 1 }
-                    , { ID: 4, name: "Lùn", avatar: 'lun.png', isBoss: 1 }
-                    , { ID: 5, name: "Hùng", avatar: 'hung.png', isBoss: 1 }
-                    , { ID: 6, name: "Nam", avatar: 'nam.png', isBoss: 1 }
-                    , { ID: 7, name: "Thanh", avatar: 'thanh.png', isBoss: 1 }];
-                localStorage.setItem('UserDB', JSON.stringify(UserDB));
-                storage = localStorage.getItem('UserDB');
-            }
-            obj = JSON.parse(storage);
-            var arr = [];
-            obj.forEach(x=>{arr.push(x.ID)});
-            var x = arr.sort();
-            count = x.length ==0 ? 0 : Number(x[x.length-1]) + 1;
-            obj.forEach((val,i) => {
-                var ava = val.avatar.indexOf("data") == 0 ? val.avatar : `img/${val.avatar}`
-                var b = $(`<div class="col-2" id="member${val.ID}" onclick="add(this,${val.ID});">`);
-                var c = $('<div class="row">');
-                var d = $(`<img src="${ava}" alt="Avatar" class="avatar">`);
-                var e = $('<div class="row">');
-                var f = $(`<span>${val.name}</span>`);
-                c.append(d);
-                e.append(f);
-                b.append(c, e);
-                $("#addout").append(b);
-            })
-            //console.log(new Date().toJSON().slice(0, 10).replace(/-/g, '/'))
+            User.createNewUserDB();
+            Index.createNewListUser();
+            History.createNewHistory();
+            var obj = User.getUserDB();
+            Index.addListAvatar(obj,"addout");
             $('#datePicker').val(new Date().toJSON().slice(0, 10));
         });
+
+        // ngay 1-7-2021------------------------------------
+        const Hoadonle = ()=>{
+            Common.An('hoadoncosan');
+            Common.Hienthi('hoadonle');
+        }
+        const Hoadoncosan= ()=>{
+            Common.An('hoadonle');
+            Common.Hienthi('hoadoncosan');
+            var id1 = HangVN.createSelect_Tenhoadon("selecthdcs","idhdccs");
+            var id2 = HangVN.createSelect_mathang("selecthdcs_mh","idhdccs_mh", id1);
+            HangVN.createSelect_soluong("selecthdcs_sl","idhdccs_sl", id1, id2);
+        }
+        const Themhdcs = ()=>{
+        }
+        // ngay 1-7-2021------------------------------------
         const add = (ele, id) => {
-            //alert(ele.id)
             var e = $("#" + ele.id);
-            // var index = ele.id.match(/\d{1,999}/);
-            // var ind = Number(index[0]) - 1;
-            //var x = obj.filter(val => val.ID == ind)[0];
             if (e.parent().attr('id') == 'addon') {//xoa
                 if (ele.id.includes('memberadd')) {
                     e.remove();
-                    // count--;
                 } else {
                     $("#addout").append(e);
                 }
-                list = list.filter((val) => val.ID != id);
-                var c = list.length; 
-                $("#total").text(c);
+                Index.deleteListUser(id);
             } else {//them
                 $("#addon").append(e);
-                var x = obj.filter(val => val.ID == id)[0];
-                list.push(x);
-                var c = list.length; 
-                $("#total").text(c);
+                Index.addListUserId(id);
             }
-            console.log(list)
+            var c = Index.getListLenght(); 
+                $("#total").text(c);
         }
         const newmem = () => {
             if ($('#addid').val() == "+") {
@@ -360,7 +383,8 @@
             if ($('#txtName').val() != '') {
                 var radioValue = $("input[name='gender']:checked").val();
                 var gender = radioValue == 'male' ? 'avatar' : 'avatar2';
-                var b = $(`<div class="col-2" id="memberadd${count}" onclick="add(this, ${count});">`);
+                var newID = Index.createUser($('#txtName').val(),`${gender}.png`,2);
+                var b = $(`<div class="col-2" id="memberadd${newID}" onclick="add(this, ${newID});">`);
                 var c = $('<div class="row">');
                 var d = $(`<img src="img/${gender}.png" alt="Avatar" class="avatar">`);
                 var e = $('<div class="row">');
@@ -368,43 +392,28 @@
                 c.append(d);
                 e.append(f);
                 b.append(c, e);
-                // var genderi = radioValue == 'male' ? 1 : 0;
-                currentObjUser = { ID: count, name: $('#txtName').val(), avatar: gender + ".png", isBoss: 0 }
-                list.push(currentObjUser);
-                var c = list.length;
-                $("#total").text(c);
+                var total = Index.getListLenght();
+                $("#total").text(total);
                 $("#addon").append(b);
                 $('#addid').val('+');
                 $('#txtName').val('');
                 $("#male").prop('checked', true);
                 $('#addnew').css("display", 'none');
-                count++;
-                //$("#total").text(Number($("#total").text()) + 1);
             } else {
                 alert('Nhập tên vào đi cưng!');
             }
         }
         const nhaphoadon = () => {
-            if (list.length == 0) {
+            if (Index.getListLenght() == 0) {
                 alert('Chọn 1 người tham gia đi chứ!\nClick avatar hoặc nút [+]');
                 return;
             }
-            $('#intent1').css("display", 'none');
-            $('#intent2').css("display", 'block');
+            Common.An('intent1');
+            Common.Hienthi('intent2');
             $('#ngay').text($('#datePicker').val());
-            var sel = $('<select id="selecthd">').appendTo('#select');
-            list.forEach((val)=> {
-                sel.append($("<option>").attr('value', val.ID).text(val.name));
-            });
-            var per = [];
-            list.forEach((val) => {
-                var objper = {};
-                objper.ID = val.ID;
-                objper.chitiet = [];
-                objper.tong = 0;
-                per.push(objper);
-            })
-            currentDate = { ngay: $('#datePicker').val(), person: per, tong: 0 }
+            Index.createSelect('select','selecthd');
+            Index.deleteCurrentDate();
+            Index.createCurrentDate($('#datePicker').val());
         }
         const back1 = () => {
             $('#intent1').css("display", 'block');
@@ -413,31 +422,24 @@
             $('#select').empty();
             $('#banggia').empty();
             $('#tong').text('0');
-            currentDate = {}
+            // currentDate = {}
         }
         const Them = () => {
-            if ($('#txtGia').val() == '') {alert('Nhập số tiền đã mua đi nào!'); return; }
+            if ($('#txtGia').val() == '') {
+                alert('Nhập số tiền đã mua đi nào!'); 
+                return; 
+            }
             var curtong = Number($("#tong").text());
+            var id = $("#selecthd option:selected").val();
+            var hoadon = $("#txtHoadon").val();
             var gia = Number($("#txtGia").val());
-            var indexhd = 0;
-            currentDate.person.forEach(y => {
-                if (y.ID == $("#selecthd option:selected").val()) {
-                    indexhd = y.chitiet.length;
-                    y.chitiet.push({hoadon: $("#txtHoadon").val(), gia: $("#txtGia").val() })
-                    var t = Number(y.tong);
-                    var g = Number($("#txtGia").val());
-                    y.tong = t + g;
-                }
-            })
-            currentDate.tong = curtong + gia;
-            console.log(currentDate);
+            var idhoadon = Index.newChitiet(id,hoadon,gia);
             var a = $('#banggia');
-            var b = $(`<tr id="tr${counttb}"></tr>`);
+            var b = $(`<tr id="tr${id}_${idhoadon}"></tr>`);
             var c = $(`<td>${$("#selecthd option:selected").text()}</td>`);
-            var d = $(`<td>${$("#txtHoadon").val()}</td>`);
-            var e = $(`<td id="td${counttb}">${$("#txtGia").val()}</td>`);
-            var f = $(`<td><input type="button" value="Xóa" onclick="Delete(${counttb},${$('#selecthd option:selected').val()},${indexhd})" /></td>`);
-            counttb++;
+            var d = $(`<td>${hoadon}</td>`);
+            var e = $(`<td>${gia}</td>`);
+            var f = $(`<td><input type="button" value="Xóa" onclick="Delete(${id},${idhoadon})" /></td>`);
             b.append(c, d, e, f);
             a.append(b);
             $("#tong").text(curtong + gia);
@@ -446,22 +448,11 @@
 
         }
 
-        const Delete = (i, id, idhd) => {
+        const Delete = (id, idhoadon) => {
             console.log(id)
-            var curtong = Number($("#tong").text());
-            var gia = Number($(`#td${i}`).text());
-            $("#tong").text(curtong - gia);
-            $(`#tr${i}`).remove();
-            currentDate.person.forEach(y => {
-                if (y.ID == id) {
-                    var g = y.chitiet[Number(idhd)].gia;
-                    var t = Number(y.tong);
-                    y.chitiet.splice(Number(idhd),1);
-                    y.tong = t - g;
-                }
-            })
-            currentDate.tong = curtong - gia;
-            console.log(currentDate);
+            $(`#tr${id}_${idhoadon}`).remove();
+            var tong = Index.deleteChitiet(id, idhoadon);
+            $("#tong").text(tong);
         }
 
         const Sum = () => {
@@ -469,45 +460,37 @@
                 alert('Không mua gì làm sao tính tổng?');
                 return;
             }
-            $('#intent2').css("display", 'none');
-            $('#intent3').css("display", 'block');
+            Common.An("intent2");
+            Common.Hienthi("intent3");
+            var tb = Index.setKetQua();
+            var currentDate = Index.getCurrentDate();
             $('#ngay2').text($('#datePicker').val());
-            var per = Math.round(currentDate.tong / (list.length));
+            $('#binhquan').text(tb);
             var a = $('#banggia2');
-            list.forEach((val) => {
-                var gia = 0;
-                currentDate.person.forEach(y => {
-                    if (y.ID == val.ID) {
-                        gia = Number(y.tong);
-                    }
-                })
+            currentDate.persons.forEach((val) => {
                 var b = $(`<tr></tr>`);
                 var c = $(`<td>${val.name}</td>`);
-                var d = $(`<td>${gia}</td>`);
-                var e = $(`<td id="td2${counttb}">${per - gia}</td>`);
-                var g = $(`<td><input type="checkbox" id="cb${counttb}" value="Thanh toán"> <label for="cb${counttb}"> Thanh toán</label><br></td>`);
-                counttb++;
+                var d = $(`<td>${val.tong}</td>`);
+                var e = $(`<td>${val.conlai}</td>`);
+                var g = $(`<td><input type="checkbox" id="cb${val.ID}" value="Thanh toán"> <label for="cb${val.ID}"> Thanh toán</label></td>`);
                 b.append(c, d, e, g);
                 a.append(b);
-            })
-            $('#binhquan').text(per);
-            list.forEach((val, i) => {
                 var ava = val.avatar.indexOf("data") == 0 ? val.avatar : `img/${val.avatar}`
-                var b = $(`<div class="col-2" id="member_${val.ID}" onclick="add2(this);">`);
-                var c = $('<div class="row">');
-                var d = $(`<img src="${ava}" alt="Avatar" class="avatar">`);
-                var e = $('<div class="row">');
-                var f = $(`<span>${val.name}</span>`);
-                c.append(d);
-                e.append(f);
-                b.append(c, e);
-                $("#addout2").append(b);
+                var b1 = $(`<div class="col-2" id="member_${val.ID}" onclick="add2(this,${val.ID});">`);
+                var c1 = $('<div class="row">');
+                var d1 = $(`<img src="${ava}" alt="Avatar" class="avatar">`);
+                var e1 = $('<div class="row">');
+                var f1 = $(`<span>${val.name}</span>`);
+                c1.append(d1);
+                e1.append(f1);
+                b1.append(c1, e1);
+                $("#addout2").append(b1);
+                Index.setEndResult();
             })
-            
         }
         const back2 = () => {
-            $('#intent2').css("display", 'block');
-            $('#intent3').css("display", 'none');
+            Common.An("intent3");
+            Common.Hienthi("intent2");
             $('#ngay2').text('');
             $('#banggia2').empty();
             $("#addout2").empty();
@@ -520,51 +503,46 @@
             var x = document.getElementById('btndacbiet');
             if (e.value == "Tính nhanh") {
                 e.value = "Hủy";
-                $('#tinhnhanh').css("display", 'block');
-                $('#dacbiet').css("display", 'none');
-                $('#tbtotal').css("display", 'none');
+                Common.Hienthi("tinhnhanh");
+                Common.An("dacbiet");
+                Common.An("tbtotal");
                 $('#select2').empty();
                 $('#btndacbiet').val('Đặc biệt');
             } else {
                 e.value = "Tính nhanh";
-                $('#tinhnhanh').css("display", 'none');
-                $('#tbtotal').css("display", 'table');
+                Common.An("tinhnhanh");
+                Common.Hienthi("tbtotal",'table');
             }
         }
 
-        const add2 = (ele) => {
-            //alert(ele.id)
+        const add2 = (ele, id) => {
             var e = $("#" + ele.id);
-            var index = ele.id.match(/\d{1,999}/);
-            var ind = Number(index[0]);
             var tong = Number($('#tongcacu').text())
-            //var x = obj.filter(val => val.ID == ind)[0];
-            var per = Math.round(currentDate.tong / (list.length));
+            var currentDate = Index.getCurrentDate();
             if (e.parent().attr('id') == 'addon2') {//xoa
                 $("#addout2").append(ele);
-                currentDate.person.forEach(y => {
-                    if (y.ID == ind) {
-                        var gia = Number(y.tong);
-                        $('#tongcacu').text(tong - (per - gia));
+                var per = currentDate.persons;
+                per.forEach((v) => {
+                    if (v.ID == id) {
+                        $('#tongcacu').text(tong - v.conlai);
                     }
                 })
             } else {//them
                 $("#addon2").append(ele);
-                currentDate.person.forEach(y => {
-                    if (y.ID == ind) {
-                        var gia = Number(y.tong);
-                        $('#tongcacu').text(tong + (per - gia));
+                var per = currentDate.persons;
+                per.forEach( (v) => {
+                    if (v.ID == id) {
+                        $('#tongcacu').text(tong + v.conlai);
                     }
                 })
             }
-            console.log(list)
         }
         const DacBiet = (e) => {
             if (e.value == "Đặc biệt") {
                 e.value = "Hủy";
-                $('#dacbiet').css("display", 'block');
-                $('#tinhnhanh').css("display", 'none');
-                $('#tbtotal').css("display", 'none');
+                Common.Hienthi("dacbiet");
+                Common.An("tinhnhanh");
+                Common.An("tbtotal");
                 $('#btntinhnhanh').val("Tính nhanh");
                 $('#select2').empty();
                 var con = $('#selecthd').html();
@@ -572,75 +550,57 @@
                 sel.append($(con))
             } else {
                 e.value = "Đặc biệt";
-                $('#dacbiet').css("display", 'none');
-                $('#tbtotal').css("display", 'table');
+                Common.Hienthi("tbtotal", 'table');
+                Common.An("dacbiet");
             }
-            
         }
         const Themdb = () => {
-            var x = arrname.indexOf($("#selectten option:selected").text());
-            if (x != -1) {
+            // var count = 0;
+            var currentDate = Index.getCurrentDate();
+            var id= $("#selectten option:selected").val();
+            var hasId = currentDate.dacbiet.find(v=>v.ID==id);
+            if(hasId) {
                 alert('Trùng tên rồi \n Chọn tên khác đi');
                 return;
             }
             var tien = Number($("#txtGia2").val());
-            if ($("#txtGia2").val() == '' || tien > currentDate.tong) {
+            if ($("#txtGia2").val() == '' || tien+currentDate.tongdb > currentDate.tong) {
                 alert('Cao hơn tiền tổng rồi');
                 return;
             }
+            Index.addDacBiet(id,tien);
             var a = $('#banggia3');
-            var b = $(`<tr id="trdb${counttb2}"></tr>`);
-            var c = $(`<td id="tddb1${counttb2}">${$("#selectten option:selected").text()}</td>`);
-            var e = $(`<td id="tddb2${counttb2}">${$("#txtGia2").val()}</td>`);
-            var f = $(`<td><input type="button" value="Xóa" onclick="Delete2(${counttb2},'${$('#selectten option:selected').text()}',${$('#selectten option:selected').val()})" /></td>`);
-            counttb2++;
+            var b = $(`<tr id="trdb${id}"></tr>`);
+            var c = $(`<td>${$("#selectten option:selected").text()}</td>`);
+            var e = $(`<td>${tien}</td>`);
+            var f = $(`<td><input type="button" value="Xóa" onclick="Delete2(${id})" /></td>`);
             b.append(c, e, f);
-            a.append(b);
-            arrname.push($("#selectten option:selected").text())
-            var obj = {};
-            obj.val = Number($('#selectten option:selected').val());
-            obj.tien = tien;
-            listdacbiet.push(obj);
+            a.append(b);;
         }
-        const Delete2 = (id, text, val) => {
-            var x = arrname.indexOf(text);
-            arrname.splice(x, 1);
+        const Delete2 = (id) => {
             $(`#trdb${id}`).remove();
-            var index = -1;
-            listdacbiet.forEach((val,i)=>{if(val.val == val) {index = i;}})
-            listdacbiet.splice(index,1);
+            Index.delDacBiet(id);
         }
 
         const SumDB = ()=> {
-            var no = 0;
-            var tong = currentDate.tong;
-            var arrID = [];
-            listdacbiet.forEach((val)=>{
-                arrID.push(val.val);
-                tong = tong - val.tien;
-            })
-
-            var per = Math.round(tong / (list.length-listdacbiet.length));
+            Index.setEndResult();
+            var currentDate = Index.getCurrentDate();
             var a = $('#banggia4');
             a.empty();
-            console.log(arrID)
-            console.log(arrID.includes(0))
-            var x = list.filter(m=>!arrID.includes(m.ID))
-            x.forEach((val) => {
-                var gia = 0;
-                currentDate.person.forEach(y => {
-                    if (y.ID == val.ID) {
-                        gia = Number(y.tong);
-                    }
-                })
+            currentDate.endResult.forEach((val) => {
                 var b = $(`<tr></tr>`);
                 var c = $(`<td>${val.name}</td>`);
-                var d = $(`<td>${gia}</td>`);
-                var e = $(`<td>${per - gia}</td>`);
-                var g = $(`<td><input type="checkbox" id="cb${no}" value="Thanh toán"> <label for="cb${no}"> Thanh toán</label><br></td>`);
+                var d = $(`<td>${val.tong}</td>`);
+                var e = $(`<td>${val.conlai}</td>`);
+                var g = $(`<td><input type="checkbox" id="cbdb${val.ID}" value="Thanh toán" onclick="Tattoan(this,${val.ID})"> <label for="cbdb${val.ID}"> Thanh toán</label><br></td>`);
                 b.append(c, d, e, g);
                 a.append(b);
             })
+        }
+
+        const Tattoan = (elem,id) =>{
+            var check = elem.checked;
+            Index.Tattoan(id,check);
         }
     </script>
 </body>
