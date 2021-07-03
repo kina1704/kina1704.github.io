@@ -26,7 +26,7 @@ class Common {
     // Tạo select
     // ------------------------------
     static createSelect(parentid,newid) {
-        var sel = $(`<select id="${newid}">`).appendTo(`#${parentid}`);
+        var sel = $(`<select id="${newid}"  class="width-200">`).appendTo(`#${parentid}`);
         var list = User.getUserDB();
         list.forEach((val)=> {
             sel.append($("<option>").attr('value', val.ID).text(val.name));

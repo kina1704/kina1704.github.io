@@ -48,7 +48,7 @@
                     </li>
                 </ul>
             </div>
-            <section class="container-fluid mt-5">
+            <section class="pd-t-5">
                 <div id="intent1">
                     <div class="row d-flex flex-row">
                         <div class="col-3">
@@ -185,38 +185,38 @@
                     </div>
                     <div id="hoadoncosan" style="padding-top: 20px;display: none;">
                         <div class="row d-flex flex-row">
-                            <div class="col-3">
+                            <div class="col-sm-3">
                                 <label>Tên Hóa đơn:</label>
                             </div>
-                            <div class="col-9" id="selecthdcs">
+                            <div class="col-sm-9" id="selecthdcs">
                             </div>
                         </div>
                         <div class="row d-flex flex-row">
-                            <div class="col-3">
+                            <div class="col-sm-3">
                                 <label>Tên mặt hàng:</label>
                             </div>
-                            <div class="col-9" id="selecthdcs_mh">
+                            <div class="col-sm-9" id="selecthdcs_mh">
                             </div>
                         </div>
                         <div class="row d-flex flex-row">
-                            <div class="col-3">
+                            <div class="col-sm-3">
                                 <label>Số lượng:</label>
                             </div>
-                            <div class="col-9" id="selecthdcs_sl">
+                            <div class="col-sm-9" id="selecthdcs_sl">
                             </div>
                         </div>
                         <div class="row d-flex flex-row">
-                            <div class="col-3">
+                            <div class="col-sm-3">
                                 <label>Giá:</label>
                             </div>
-                            <div class="col-9" id="selecthdcs_sl">
+                            <div class="col-sm-9" id="selecthdcs_sl">
                                 <label id="giahdcs"></label>
                             </div>
                         </div>
                         <div class="row d-flex flex-row">
-                            <div class="col-3">
+                            <div class="col-sm-3">
                             </div>
-                            <div class="col-9">
+                            <div class="col-sm-9">
                                 <input type="button" value="Thêm" onclick="HangVN.Themhdcs()" />
                             </div>
                         </div>
@@ -338,12 +338,17 @@
             $('#datePicker').val(new Date().toJSON().slice(0, 10));
         });
 
-        // ngay 1-7-2021------------------------------------
+        // ngay 2-7-2021------------------------------------
         const Hoadonle = ()=>{
             Common.An('hoadoncosan');
             Common.Hienthi('hoadonle');
         }
         const Hoadoncosan= ()=>{
+            var hd = HangVN.getHoaDon();
+            if(hd == null || hd.length == 0) {
+                alert('Không có hóa đơn nào!')
+                return;
+            }
             Common.An('hoadonle');
             Common.Hienthi('hoadoncosan');
             var id1 = HangVN.createSelect_Tenhoadon("selecthdcs","idhdccs");
@@ -352,7 +357,7 @@
         }
         const Themhdcs = ()=>{
         }
-        // ngay 1-7-2021------------------------------------
+        // ngay 2-7-2021------------------------------------
         const add = (ele, id) => {
             var e = $("#" + ele.id);
             if (e.parent().attr('id') == 'addon') {//xoa

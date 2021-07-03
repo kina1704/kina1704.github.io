@@ -46,92 +46,105 @@
                 </li>
             </ul>
         </div>
-        <section class="container-fluid mt-5">
+        <section class="pd-t-5">
             <div>
-                <input type="button" value="Tạo đơn hàng" onclick="createHD()" />
-                <input type="button" value="Xem list đơn hàng" onclick="viewHD()" />
+                <input type="button" class="width-150" id="idcreatehd" disabled value="Tạo đơn hàng" onclick="createHD(this)" />
+                <input type="button" class="width-150" id="idviewhd" value="Xem list đơn hàng" onclick="viewHD(this)" />
             </div>
-            <div id="intent1">
-                <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
-                        <label for="date">Ngày:</label>
+            <div id="intent1" class="pd-t-5">
+                <div id="themdonhang1">
+                    <a id="idtaga" type="hidden" href="#collapseanhien" role="button"  data-toggle="collapse" aria-expanded="true" aria-controls="collapseanhien"></a>
+                    <div>
+                        <input type="button" class="width-150" value="Lưu đơn hàng" onclick="saveHD()" />
+                        <input type="button" class="width-150" value="Ẩn/Hiện" onclick="$('#idtaga').click();"/>
                     </div>
-                    <div class="col-sm-9">
-                        <input id="datePicker" type="date" name="datePicker"/>
+                    <div  class="collapse" id="collapseanhien">
+                        <div class="row d-flex flex-row">
+                            <div class="col-sm-3">
+                                <label for="date">Tên người mua:</label>
+                            </div>
+                            <div id="select"  class="col-sm-9">
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-sm-3">
+                                <label>Tên Hóa Đơn:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input id="namehd" class="width-200" type="text" value="Mua Hàng VN" placeholder="Mua Hàng VN"/>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-sm-3">
+                                <label for="date">Ngày:</label>
+                            </div>
+                            <div class="col-sm-9">
+                                <input id="datePicker" class="width-200" type="date" name="datePicker"/>
+                            </div>
+                        </div>
+                        <div class="row d-flex flex-row">
+                            <div class="col-sm-3">
+                            </div>
+                            <div class="col-sm-9">
+                                <input type="button" value="Thêm mặt hàng" class="width-200" onclick="changeView('themdonhang2','themdonhang1')" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <label>Đơn hàng của:</label> <span id="ten"></span>
+                    </div> -->
+                    <div>
+                        <label>Tổng: </label> <span id="tong">0</span>
+                    </div>
+                    <table class="table table-bordered mt-1">
+                        <thead>
+                            <tr>
+                                <th>Mặt hàng</th>
+                                <th>Số lượng</th>
+                                <th>Giá</th>
+                                <th>Xóa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="banggia">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="themdonhang2" style="display: none;">
+                    <div><input type="button" value="Quay Lại" onclick="changeView('themdonhang1','themdonhang2')"/></div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Tên hàng:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txtten" type="text"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Số lượng:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txtNo" type="number" value="1"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                            <label>Giá từng đơn vị:</label>
+                        </div>
+                        <div class="col-9">
+                            <input id="txtGia" type="number"/>
+                        </div>
+                    </div>
+                    <div class="row d-flex flex-row">
+                        <div class="col-3">
+                        </div>
+                        <div class="col-9">
+                            <input type="button" value="Lưu" onclick="Them()" />
+                        </div>
                     </div>
                 </div>
-                <hr/>
-                <div class="row d-flex flex-row">
-                    <div class="col-3">
-                        <label>Tên hàng:</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="txtten" type="text"/>
-                    </div>
-                </div>
-                <div class="row d-flex flex-row">
-                    <div class="col-3">
-                        <label>Số lượng:</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="txtNo" type="number" value="1"/>
-                    </div>
-                </div>
-                <div class="row d-flex flex-row">
-                    <div class="col-3">
-                        <label>Giá từng đơn vị:</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="txtGia" type="number"/>
-                    </div>
-                </div>
-                <div class="row d-flex flex-row">
-                    <div class="col-3">
-                    </div>
-                    <div class="col-9">
-                        <input type="button" value="Thêm" onclick="Them()" />
-                    </div>
-                </div>
-                <hr/>
-                <div>
-                    <input type="button" value="Lưu đơn hàng" onclick="saveHD()" />
-                </div>
-                <div class="row d-flex flex-row">
-                    <div class="col-sm-3">
-                        <label for="date">Chọn người trả tiền:</label>
-                    </div>
-                    <div id="select"  class="col-sm-3">
-                    </div>
-                </div>
-                <hr/>
-                <div class="row d-flex flex-row">
-                    <div class="col-3">
-                        <label>Tên Hóa Đơn:</label>
-                    </div>
-                    <div class="col-9">
-                        <input id="namehd" type="text" value="Mua Hàng VN"/>
-                    </div>
-                </div>
-                <!-- <div>
-                    <label>Đơn hàng của:</label> <span id="ten"></span>
-                </div> -->
-                <div>
-                    <label>Tổng: </label> <span id="tong">0</span>
-                </div>
-                <table class="table table-bordered mt-1">
-                    <thead>
-                        <tr>
-                            <th>Mặt hàng</th>
-                            <th>Số lượng</th>
-                            <th>Giá</th>
-                            <th>Xóa</th>
-                        </tr>
-                    </thead>
-                    <tbody id="banggia">
-                    </tbody>
-                </table>
             </div>
-            <div id="intent2" style="display: none;">
+            <div id="intent2"  class="pd-t-5" style="display: none;">
                 <div id="contentchititet1">
                     <div>Danh Sách Hóa Đơn hiện có</div>
                     <table class="table table-bordered mt-1">
@@ -209,22 +222,44 @@
         $(document).ready(function () {
             Common.createSelect('select','selecthd');
             $('#datePicker').val(new Date().toJSON().slice(0, 10));
+            $('#collapseanhien').collapse('show');
         });
-        const createHD = () =>{
-            var confirma = confirm("bạn có muốn tạo mới hóa đơn?");
-            if(!confirma) {return;}
+        // --------- edit ngay 2-7-2021 ------------
+        const changeView = (id1,id2)=> {
+            Delview2();
+            Showdonhang(id1,id2);
+        }
+        const Delview2 =()=>{
+            $('#txtten').val('');
+            $('#txtNo').val('1');
+            $('#txtGia').val('');
+        }
+        const Showdonhang = (id1,id2) => {
+            Common.Hienthi(id1);
+            Common.An(id2);
+        }
+        // --------- edit ngay 2-7-2021 ------------
+        const createHD = (e) =>{
+            $(e).prop('disabled', true);
+            $('#idviewhd').prop('disabled', false);
+            // var confirma = confirm("bạn có muốn tạo mới hóa đơn?");
+            // if(!confirma) {return;}
             $('#banggia').empty();
             $('#txtten').val('');
             $('#txtGia').val('');
+            $('#txtNo').val('1');
             $('#select').empty();
+            $('#tong').text("0");
+            Showdonhang('themdonhang1','themdonhang2');
             Common.createSelect('select','selecthd');
             Common.Hienthi("intent1");
             Common.An("intent2");
-            $('#tong').text("");
         }
 
         // --Lich su hoa don--
-        const viewHD = ()=> {
+        const viewHD = (e)=> {
+            $(e).prop('disabled', true);
+            $('#idcreatehd').prop('disabled', false);
             var a = $('#lichsu');
             a.html('');
             var hoadon = HangVN.getHoaDon();
@@ -359,10 +394,11 @@
             a.append(b);
             $('#tong').text(tong+(gia*soluong));
             // $('#ten').text(ten);
-            $("#txtHoadon").val('');
-            $('#txtten').val('');
-            $('#txtNo').val('1');
-            $("#txtGia").val('');
+            // $("#txtHoadon").val('');
+            // $('#txtten').val('');
+            // $('#txtNo').val('1');
+            // $("#txtGia").val('');
+            changeView('themdonhang1','themdonhang2');
         }
 
         const Delete = (id, idno , type = "") => {
@@ -383,8 +419,11 @@
         }
 
         const saveHD = () =>{
-            if($('#banggia tr').length == 0 || $("#namehd").val() == ""){
-                alert("Bạn vui lòng nhập thông tin vào!");
+            if($('#banggia tr').length == 0 ){
+                alert("Bạn vui lòng nhập thông tin mặt hàng vào!");
+                return;
+            } else if($("#namehd").val() == "") {
+                alert("Bạn vui lòng nhập thông tin tên hóa đơn vào!");
                 return;
             }
             var confirma = confirm("bạn có chắc chắn lưu hóa đơn này?");
