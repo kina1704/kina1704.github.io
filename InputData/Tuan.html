@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Nhập data tuần</title>
+        <style>
+            .collapsing {
+            -webkit-transition: none;
+            transition: none;
+            display: none;
+    }
+        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Chi tiết</title>
+        <link rel="stylesheet" href="./css/common.css">
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
+    
+        <!-- jQuery library -->
+        <script src="./js/jquery.min.js"></script>
+    
+        <!-- Popper JS -->
+        <script src="./js/popper.min.js"></script>
+    
+        <!-- Latest compiled JavaScript -->
+        <script src="./js/bootstrap.min.js"></script>
+        <!-- <script src="./js/common.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
+
+        <!-- Add Firebase products that you want to use -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="./js/common.js"></script>
+    </head>
+<body  class="body">
+    <!------------------------------------ MODAL POPUP TOP --------------------------------------------------->
+    <!-- The Modal of Sao And Thong Tin-->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <input type="hidden" value="" id="hidden_id"/>
+            <span class="close" id="close">&times;</span>
+            <br/>
+            <div>
+                <h2 id="title_popup" class="font-weight-bold">Title</h2>
+            </div>
+            <div class="pd-l-20">
+                <div class="column" class="container">
+                    <div  class="row font-weight-bold f-c-blue">Công Việc</div>
+                    <div class="row pd-l-15">
+                        <div class="w-100px">Sao:</div>
+                        <select id="mcvs" class="w-100px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="row pd-l-15"> 
+                        <div class="w-100px" >Thông tin:</div>
+                        <textarea  class="tarea-size" id="mcvtt"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-l-20">
+                <div class="column" class="container">
+                    <div  class="row font-weight-bold f-c-blue">Sức khỏe</div>
+                    <div class="row pd-l-15">
+                        <div  class="w-100px">Sao:</div>
+                        <select id="msks" class="w-100px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="row pd-l-15"> 
+                        <div class="w-100px">Thông tin:</div>
+                        <textarea   class="tarea-size" id="msktt"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="pd-l-20">
+                <div class="column" class="container">
+                    <div  class="row font-weight-bold f-c-blue">Tiền Bạc</div>
+                    <div class="row pd-l-15">
+                        <div  class="w-100px">Sao:</div>
+                        <select id="mtbs" class="w-100px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="row pd-l-15"> 
+                        <div class="w-100px ">Thông tin:</div>
+                        <textarea   class="tarea-size" id="mtbtt"></textarea>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="pd-l-20">
+                <div class="column" class="container">
+                    <div  class="row font-weight-bold f-c-blue">Tình Cảm</div>
+                    <div class="row pd-l-15">
+                        <div  class="w-100px">Sao:</div>
+                        <select id="mtcs" class="w-100px">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="row pd-l-15"> 
+                        <div class="w-100px">Thông tin:</div>
+                        <textarea   class="tarea-size" id="mtctt"></textarea>
+                    </div>
+                    
+                </div>
+            </div>
+            <div> <button class="w-100px" onclick="TopInput()">OK</button></div>
+        </div>
+    </div>
+    <!------------------------------------ MODAL POPUP TOP --------------------------------------------------->
+    <div class="wrapper">
+        <div class="container-fluid .pt-3">
+            <nav class="navbar navbar-dark bg-dark">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+            </nav>
+            <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Ngay.html">Ngày</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="">Tuần</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Thang.html">Tháng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Nam.html">Năm</a>
+                    </li>
+                </ul>
+            </div>
+            <div style="margin-top:20px;">
+                <div class="row">
+                    <div style="margin: 15px;">
+                        <label for="date">Chọn ngày thứ 2 đầu tuần:</label>
+                        <input id="datePicker" type="date" name="datePicker"
+                            onchange="ChangeDatePicker(this)" />
+                        <input type="button" value="Save Data" onclick="Save()" />
+                        <!-- <input type="button" id="btnClear" value="Clear All"  style="margin-left: 5px;" onclick="Clear()" /> -->
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" style="width: 100px;">Cung</th>
+                            <th colspan="2">Công Việc</th>
+                            <th colspan="2">Sức Khỏe</th>
+                            <th colspan="2">Tiền Bạc</th>
+                            <th colspan="2">Tình Cảm</th>
+                        </tr>
+                        <tr>
+                            <th>Sao</th>
+                            <th>Thông Tin</th>
+                            <th>Sao</th>
+                            <th>Thông Tin</th>
+                            <th>Sao</th>
+                            <th>Thông Tin</th>
+                            <th>Sao</th>
+                            <th>Thông Tin</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data">
+                    </tbody>
+                </table>
+                <table class="table table-bordered" style="visibility: hidden;">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px;">Cung</th>
+                            <th>Màu May Mắn</th>
+                            <th>Số May Mắn</th>
+                        </tr>
+                    </thead>
+                    <tbody id="data2">
+                    </tbody>
+                </table>
+            </div>
+        </div>       
+    </div>
+</body>
+</html>
+<script>
+
+    // Get the modal
+    /*---------------------------------------------------------------*/
+    /* Xử lý phần top modal */
+    /*---------------------------------------------------------------*/
+    var modal =$("#myModal");
+    // Get the <span> element that closes the modal
+    var span = $("#close");
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    // When the user clicks on the button, open the modal
+    OpenPopUp = (i)=>{
+        var date = $('#datePicker').val();
+        if(!IsMonday(date)){
+            alert(STR_CHECK_MONDAY);
+            return;
+        }
+        $(`#title_popup`).text(`Nhập Data ngày cho cung ${CUNG_TITLE[i]}`)
+        $("#hidden_id").val(i);
+        $(`#mcvs`).val($(`#cvs${i}`).text());
+        $(`#mcvtt`).val($(`#cvtt${i}`).text());
+        $(`#msks`).val($(`#sks${i}`).text());
+        $(`#msktt`).val($(`#sktt${i}`).text());
+        $(`#mtbs`).val($(`#tbs${i}`).text());
+        $(`#mtbtt`).val($(`#tbtt${i}`).text());
+        $(`#mtcs`).val($(`#tcs${i}`).text());
+        $(`#mtctt`).val($(`#tctt${i}`).text());
+        modal.css("display", "block");
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.click(function() {
+        DeleteDataPopUp1();
+        modal.css("display", "none");
+    })
+
+    DeleteDataPopUp1 = () =>{
+        var textarea = $("#myModal textarea");
+        var select = $("#myModal select");
+        select.each(function(){
+            $(this).val(1);
+        })
+        textarea.each(function(){
+            $(this).val("");
+        })
+    }
+
+    TopInput = ()=>{
+        var i = $("#hidden_id").val();
+        var hasblank = false;
+        $("#myModal textarea").each(function(){
+            if($(this).val() == ""){
+                hasblank = true;
+            }
+        })
+        $("#myModal select").each(function(){
+            if($(this).val() == null){
+                hasblank = true;
+            }
+        })
+        if(hasblank)
+        {
+            alert(STR_CHECK_OK);
+            return;
+        }
+        $(`#cvs${i}`).text($(`#mcvs`).val());
+        $(`#cvtt${i}`).text($(`#mcvtt`).val());
+        $(`#sks${i}`).text($(`#msks`).val());
+        $(`#sktt${i}`).text($(`#msktt`).val());
+        $(`#tbs${i}`).text($(`#mtbs`).val());
+        $(`#tbtt${i}`).text($(`#mtbtt`).val());
+        $(`#tcs${i}`).text($(`#mtcs`).val());
+        $(`#tctt${i}`).text($(`#mtctt`).val());
+
+        ChangeBackColor($(`#cvs${i}`), BG_WHITE);
+        ChangeBackColor($(`#cvtt${i}`), BG_WHITE);
+        ChangeBackColor($(`#sks${i}`), BG_WHITE);
+        ChangeBackColor($(`#sktt${i}`), BG_WHITE);
+        ChangeBackColor($(`#tbs${i}`), BG_WHITE);
+        ChangeBackColor($(`#tbtt${i}`), BG_WHITE);
+        ChangeBackColor($(`#tcs${i}`), BG_WHITE);
+        ChangeBackColor($(`#tctt${i}`), BG_WHITE);
+
+        DeleteDataPopUp1();
+        modal.css("display", "none");
+    }
+
+    /*---------------------------------------------------------------*/
+    /* Sự Kiện chọn ngày */
+    /*---------------------------------------------------------------*/
+    ChangeDatePicker = async (e)=>{
+        Delete();
+        var date = $('#datePicker').val();
+        if(!IsMonday(date)){
+            alert(STR_CHECK_MONDAY);
+            return;
+        }
+        var datefm = date.replace(/-/g,"");
+        var info = await GetData(datefm, DATA_WEEK);
+        DisplayData(info);
+    }
+    
+    /*---------------------------------------------------------------*/
+    /* Load lần đầu tạo bảng và ngày tháng */
+    /*---------------------------------------------------------------*/
+    $(document).ready(async function () {
+        /* set default datetimepicker */
+        $('#datePicker').val(new Date().toJSON().slice(0, 10));
+        /* create table */
+        for(var i =0; i< CUNG.length; i++)
+        {
+            var a = $('#data');
+            var b = $(`<tr id="${CUNG[i]}_1"></tr>`);
+            var c = $(`<td><a id="myBtn_1_${i}" href="javascript:OpenPopUp(${i})">${CUNG_TITLE[i]}</a></td>
+                        <td><span id="cvs${i}"></span></td>
+                        <td><span id="cvtt${i}"></span></td>
+                        <td><span id="sks${i}"></span></td>
+                        <td><span id="sktt${i}"></span></td>
+                        <td><span id="tbs${i}"></span></td>
+                        <td><span id="tbtt${i}"></span></td>
+                        <td><span id="tcs${i}"></span></td>
+                        <td><span id="tctt${i}"></span></td>`);
+            b.append(c);
+            a.append(b);
+        }
+        for(var i =0; i< CUNG.length; i++)
+        {
+            var a = $('#data2');
+            var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
+            var c = $(`<td>${CUNG_TITLE[i]}</td>
+                        <td><span id="mmm${i}">${GetRamDomColor()}</span></td>
+                        <td><span id="smm${i}">${GetRamDomNumber()}</span></td>`);
+            b.append(c);
+            a.append(b);
+        }
+
+        var date = $('#datePicker').val();
+        if(IsMonday()){
+            var datefm = date.replace(/-/g,"");
+            var info = await GetData(datefm, DATA_WEEK);
+            DisplayData(info);
+            console.log("end")
+        }
+    });
+
+    /*---------------------------------------------------------------*/
+    /* Hien Thi Data tu Firebase */
+    /*---------------------------------------------------------------*/
+    DisplayData = (info) =>  {
+        console.log(info.length);
+        if(info != undefined && info.length == 12)
+        {
+            for(var i =0; i< CUNG.length; i++)
+            {
+                $(`#cvs${i}`).text(info[i].congviec.sao);
+                $(`#cvtt${i}`).text(info[i].congviec.thongtin);
+                $(`#sks${i}`).text(info[i].suckhoe.sao);
+                $(`#sktt${i}`).text(info[i].suckhoe.thongtin);
+                $(`#tbs${i}`).text(info[i].tienbac.sao);
+                $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
+                $(`#tcs${i}`).text(info[i].tinhcam.sao);
+                $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
+            }
+            Check();
+        }
+    }
+
+    /*---------------------------------------------------------------*/
+    /* Kiểm tra hôm nay có phải là thứ 2 */
+    /*---------------------------------------------------------------*/
+    IsMonday = (date) =>{
+        var convertDate = new Date(date);
+        var isMonday = convertDate.getDay() == 1 ? true: false;
+        return isMonday
+    }
+
+
+    /*---------------------------------------------------------------*/
+    /* Lưu dữ liệu lên Firebase */
+    /*---------------------------------------------------------------*/
+    Save = async() =>{
+        // Kiểm tra có phải thứ 2 đầu tuần không
+        var date = $('#datePicker').val();
+        
+        if(!IsMonday(date)){
+            alert(STR_CHECK_MONDAY);
+            return;
+        }
+        
+        var datefm = date.replace(/-/g,"");
+
+        // Kiểm tra tất cả đã điền data chưa
+        var hasblank = Check();
+        if(hasblank){
+            alert(STR_CHECK);
+            return;
+        }
+
+        // add data to day in firebase thong tin va sao
+        try {
+
+            for(var i =0; i< CUNG.length; i++)
+            {
+                await db.collection('week').doc(datefm).collection(CUNG[i]).doc("data").set({
+                    congviec:{
+                        sao: Number($(`#cvs${i}`).text()),
+                        thongtin: $(`#cvtt${i}`).text()
+                    },
+                    suckhoe:{
+                        sao: Number($(`#sks${i}`).text()),
+                        thongtin: $(`#sktt${i}`).text()
+                    },
+                    tienbac:{
+                        sao: Number($(`#tbs${i}`).text()),
+                        thongtin: $(`#tbtt${i}`).text()
+                    },
+                    tinhcam:{
+                        sao: Number($(`#tcs${i}`).text()),
+                        thongtin: $(`#tctt${i}`).text()
+                    },
+                    somayman:$(`#smm${i}`).text(),
+                    maumayman:$(`#mmm${i}`).text()
+                })
+            }
+            alert(STR_SAVED);
+            // Delete();
+        } catch (err) {
+            alert(STR_ERR);
+            console.log(err.stack)
+        }
+    }
+</script>
