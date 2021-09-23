@@ -186,7 +186,7 @@
                     <tbody id="data">
                     </tbody>
                 </table>
-                <table class="table table-bordered" style="visibility: hidden;">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 100px;">Cung</th>
@@ -262,11 +262,11 @@
                 hasblank = true;
             }
         })
-        if(hasblank)
-        {
-            alert(STR_CHECK_OK);
-            return;
-        }
+        // if(hasblank)
+        // {
+        //     alert(STR_CHECK_OK);
+        //     return;
+        // }
         $(`#cvs${i}`).text($(`#mcvs`).val());
         $(`#cvtt${i}`).text($(`#mcvtt`).val());
         $(`#sks${i}`).text($(`#msks`).val());
@@ -294,9 +294,11 @@
     /*---------------------------------------------------------------*/
     ChangeDatePicker = async (e)=>{
         Delete();
-        var date = $('#datePicker').val();
-        var datefm = date.replace(/-/g,"");
+        // var date = $('#datePicker').val();
+        // var datefm = date.replace(/-/g,"");
+        var datefm = FormatDatePicker($('#datePicker').val());
         var info = await GetData(datefm, DATA_DAY);
+        console.log(info);
         DisplayData(info);
     }
 
@@ -305,8 +307,6 @@
     /* Load lần đầu tạo bảng và ngày tháng */
     /*---------------------------------------------------------------*/
     $(document).ready(async function () {
-        console.log(GetRamDomColor());
-        console.log(GetRamDomNumber());
         /* set default datetimepicker */
         $('#datePicker').val(new Date().toJSON().slice(0, 10));
         /* create table */
@@ -331,14 +331,16 @@
             var a = $('#data2');
             var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
             var c = $(`<td>${CUNG_TITLE[i]}</td>
-                        <td><span id="mmm${i}">${GetRamDomColor()}</span></td>
-                        <td><span id="smm${i}">${GetRamDomNumber()}</span></td>`);
+                        <td><input type="text" id="mmm${i}" class="color-blue"/></td>
+                        <td><input type="text" id="smm${i}" class="color-blue"/></td>`);
             b.append(c);
             a.append(b);
         }
 
-        var date = $('#datePicker').val();
-        var datefm = date.replace(/-/g,"");
+        // var date = $('#datePicker').val();
+        // var datefm = date.replace(/-/g,"");
+        var datefm = FormatDatePicker($('#datePicker').val());
+        console.log(datefm);
         var info = await GetData(datefm, DATA_DAY);
         DisplayData(info);
         console.log("end")
@@ -362,6 +364,8 @@
                 $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
                 $(`#tcs${i}`).text(info[i].tinhcam.sao);
                 $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
+                $(`#mmm${i}`).val(info[i].maumayman);
+                $(`#smm${i}`).val(info[i].somayman);
             }
             Check();
         }
@@ -379,8 +383,9 @@
         }
         try {
             // add data to day in firebase thong tin va sao
-            var date = $('#datePicker').val();
-            var datefm = date.replace(/-/g,"");
+            // var date = $('#datePicker').val();
+            // var datefm = date.replace(/-/g,"");
+            var datefm = FormatDatePicker($('#datePicker').val());
             for(var i =0; i< CUNG.length; i++)
             {
                 await db.collection('day').doc(datefm).collection(CUNG[i]).doc("data").set({
@@ -400,8 +405,8 @@
                         sao: Number($(`#tcs${i}`).text()),
                         thongtin: $(`#tctt${i}`).text()
                     },
-                    somayman:$(`#smm${i}`).text(),
-                    maumayman:$(`#mmm${i}`).text()
+                    somayman:$(`#smm${i}`).val(),
+                    maumayman:$(`#mmm${i}`).val()
                 })
             }
             alert(STR_SAVED);

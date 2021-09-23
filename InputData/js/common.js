@@ -1,7 +1,7 @@
 /*---------------------------------------------------------------*/
 /* Khai báo các Constant */
 /*---------------------------------------------------------------*/
-var CUNG = ['bachduong','kimnguu','songtu','cugiai','sutu','xunu','thienbinh','bocap','nhanma','maket','baobinh','songngu'];
+var CUNG = ['bachduong','kimnguu','songtu','cugiai','sutu','xunu','thienbinh','hocap','nhanma','maket','baobinh','songngu'];
 var CUNG_TITLE = ['Bạch Dương', 'Kim Ngưu', 'Song Tử', 'Cự Giải', 'Sư Tử', 'Xử Nữ', 'Thiên Bình', 'Bọ Cạp', 'Nhân Mã', 'Ma Kết', 'Bảo Bình', 'Song Ngư'];
 var STR_SAVED = "Đã lưu Data vào firebase!";
 var STR_ERR = "Dữ liệu sai hoặc firebase có vấn đề!";
@@ -112,4 +112,15 @@ GetData = async (d, collection)=>{
         });
     }
     return data;
+}
+
+FormatDatePicker = (val) =>
+{
+    var resDate = "";
+    var date = val.split("-");
+    if(date.length == 3)
+    {
+        resDate = date[2] + date[1] + date[0];
+    }
+    return resDate;
 }
