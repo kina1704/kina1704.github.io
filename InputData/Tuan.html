@@ -186,7 +186,7 @@
                     <tbody id="data">
                     </tbody>
                 </table>
-                <table class="table table-bordered" style="visibility: hidden;">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 100px;">Cung</th>
@@ -304,8 +304,9 @@
             alert(STR_CHECK_MONDAY);
             return;
         }
-        var datefm = date.replace(/-/g,"");
+        var datefm = FormatDatePicker($('#datePicker').val());
         var info = await GetData(datefm, DATA_WEEK);
+        console.log(info);
         DisplayData(info);
     }
     
@@ -337,15 +338,15 @@
             var a = $('#data2');
             var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
             var c = $(`<td>${CUNG_TITLE[i]}</td>
-                        <td><span id="mmm${i}">${GetRamDomColor()}</span></td>
-                        <td><span id="smm${i}">${GetRamDomNumber()}</span></td>`);
+                        <td><input type="text" id="mmm${i}" class="color-blue"/></td>
+                        <td><input type="text" id="smm${i}" class="color-blue"/></td>`);
             b.append(c);
             a.append(b);
         }
 
         var date = $('#datePicker').val();
         if(IsMonday()){
-            var datefm = date.replace(/-/g,"");
+            var datefm = FormatDatePicker($('#datePicker').val());
             var info = await GetData(datefm, DATA_WEEK);
             DisplayData(info);
             console.log("end")
@@ -369,6 +370,8 @@
                 $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
                 $(`#tcs${i}`).text(info[i].tinhcam.sao);
                 $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
+                $(`#mmm${i}`).val(info[i].maumayman);
+                $(`#smm${i}`).val(info[i].somayman);
             }
             Check();
         }
@@ -395,8 +398,6 @@
             alert(STR_CHECK_MONDAY);
             return;
         }
-        
-        var datefm = date.replace(/-/g,"");
 
         // Kiểm tra tất cả đã điền data chưa
         var hasblank = Check();
@@ -404,6 +405,9 @@
             alert(STR_CHECK);
             return;
         }
+
+        // var datefm = date.replace(/-/g,"");
+        var datefm = FormatDatePicker($('#datePicker').val());
 
         // add data to day in firebase thong tin va sao
         try {
@@ -427,8 +431,8 @@
                         sao: Number($(`#tcs${i}`).text()),
                         thongtin: $(`#tctt${i}`).text()
                     },
-                    somayman:$(`#smm${i}`).text(),
-                    maumayman:$(`#mmm${i}`).text()
+                    somayman:$(`#smm${i}`).val(),
+                    maumayman:$(`#mmm${i}`).val()
                 })
             }
             alert(STR_SAVED);

@@ -51,6 +51,11 @@ Delete = () => {
         $(this).text('');
         ChangeBackColor($(this), BG_WHITE);
     })
+    for(var i=0; i< CUNG.length; i++)
+    {
+        $(`#mmm${i}`).val('');
+        $(`#smm${i}`).val('');
+    }
 } 
 
 ChangeBackColor = (elem ,color) => {
