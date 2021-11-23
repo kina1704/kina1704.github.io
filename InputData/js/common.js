@@ -119,6 +119,22 @@ GetData = async (d, collection)=>{
     return data;
 }
 
+GetDataTvtd = async (d, gender)=>{
+    console.log(d+" "+ gender)
+    var data = "";
+    var datatt = "";
+    await db.collection("lifehoro").doc(d).collection(""+gender).get().then(querySnapshot=>{
+        querySnapshot.forEach((doc) => {
+            console.log(doc.data().tieude);
+            data = JSON.parse(doc.data().tieude);
+            datatt = JSON.parse(doc.data().thongtin);
+            // console.log(doc.tieude);
+            // data.push(doc.data());
+        });
+    });
+    return {data:data,datatt:datatt};
+}
+
 FormatDatePicker = (val) =>
 {
     var resDate = "";

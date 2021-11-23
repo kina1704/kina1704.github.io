@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Nhập data ngày</title>
+        <title>Tử Vi Trọn Đời</title>
         <style>
             .collapsing {
             -webkit-transition: none;
@@ -24,8 +24,8 @@
     
         <!-- Latest compiled JavaScript -->
         <script src="./js/bootstrap.min.js"></script>
+        <!-- <script src="./js/common.js"></script> -->
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-
         <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-analytics.js"></script>
 
@@ -61,7 +61,7 @@
                     </div>
                     <div class="row pd-l-15"> 
                         <div class="w-100px" >Thông tin:</div>
-                        <textarea class="tarea-size" id="mcvtt"></textarea>
+                        <textarea  class="tarea-size" id="mcvtt"></textarea>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="row pd-l-15"> 
                         <div class="w-100px">Thông tin:</div>
-                        <textarea class="tarea-size" id="msktt"></textarea>
+                        <textarea   class="tarea-size" id="msktt"></textarea>
                     </div>
                 </div>
             </div>
@@ -99,7 +99,7 @@
                     </div>
                     <div class="row pd-l-15"> 
                         <div class="w-100px ">Thông tin:</div>
-                        <textarea class="tarea-size" id="mtbtt"></textarea>
+                        <textarea   class="tarea-size" id="mtbtt"></textarea>
                     </div>
                     
                 </div>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="row pd-l-15"> 
                         <div class="w-100px">Thông tin:</div>
-                        <textarea class="tarea-size" id="mtctt"></textarea>
+                        <textarea   class="tarea-size" id="mtctt"></textarea>
                     </div>
                     
                 </div>
@@ -137,8 +137,8 @@
             </nav>
             <div class="collapse navbar navbar-expand-sm bg-dark navbar-dark" id="navbarToggleExternalContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="">Ngày</a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./Ngay.html">Ngày</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./Tuan.html">Tuần</a>
@@ -149,7 +149,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./Nam.html">Năm</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" active>
                         <a class="nav-link" href="./TuViTronDoi.html">Tử Vi Trọn Đời</a>
                     </li>
                 </ul>
@@ -157,16 +157,22 @@
             <div style="margin-top:20px;">
                 <div class="row">
                     <div style="margin: 15px;">
-                        <label for="date">Chọn ngày:</label>
-                        <input id="datePicker" type="date" name="datePicker"
-                            onchange="ChangeDatePicker(this)" />
-                        <input type="button" value="Save Data" onclick="Save()" />
+                        <label for="date">Chọn ngày tháng năm sinh:</label>
+                        <input id="datePicker" type="date" name="datePicker" />
                         <!-- <input type="button" id="btnClear" value="Clear All"  style="margin-left: 5px;" onclick="Clear()" /> -->
+                    </div>
+                    <div style="margin: 15px;">
+                        <span>Chọn giới tính:</span>
+                          <input type="radio" id="boy" checked name="gender" value="1">
+                          <label for="html">Nam</label>
+                          <input type="radio" id="girl" name="gender" value="2">
+                          <label for="css">Nữ</label>
+                        <input type="button" value="Tìm Kiếm" onclick="ChangeDatePicker()" />
                     </div>
                 </div>
             </div>
-            <div>
-                <table class="table table-bordered">
+            <div id ="thongtinid">
+                <!-- <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th rowspan="2" style="width: 100px;">Cung</th>
@@ -199,7 +205,7 @@
                     </thead>
                     <tbody id="data2">
                     </tbody>
-                </table>
+                </table> -->
             </div>
         </div>       
     </div>
@@ -222,16 +228,21 @@
     }
     // When the user clicks on the button, open the modal
     OpenPopUp = (i)=>{
-        $(`#title_popup`).text(`Nhập Data ngày cho cung ${CUNG_TITLE[i]}`)
-        $("#hidden_id").val(i);
-        $(`#mcvs`).val($(`#cvs${i}`).text());
-        $(`#mcvtt`).val($(`#cvtt${i}`).text());
-        $(`#msks`).val($(`#sks${i}`).text());
-        $(`#msktt`).val($(`#sktt${i}`).text());
-        $(`#mtbs`).val($(`#tbs${i}`).text());
-        $(`#mtbtt`).val($(`#tbtt${i}`).text());
-        $(`#mtcs`).val($(`#tcs${i}`).text());
-        $(`#mtctt`).val($(`#tctt${i}`).text());
+        // var date = $('#datePicker').val();
+        // if(!IsMonday(date)){
+        //     alert(STR_CHECK_MONDAY);
+        //     return;
+        // }
+        // $(`#title_popup`).text(`Nhập Data ngày cho cung ${CUNG_TITLE[i]}`)
+        // $("#hidden_id").val(i);
+        // $(`#mcvs`).val($(`#cvs${i}`).text());
+        // $(`#mcvtt`).val($(`#cvtt${i}`).text());
+        // $(`#msks`).val($(`#sks${i}`).text());
+        // $(`#msktt`).val($(`#sktt${i}`).text());
+        // $(`#mtbs`).val($(`#tbs${i}`).text());
+        // $(`#mtbtt`).val($(`#tbtt${i}`).text());
+        // $(`#mtcs`).val($(`#tcs${i}`).text());
+        // $(`#mtctt`).val($(`#tctt${i}`).text());
         modal.css("display", "block");
     }
     
@@ -253,58 +264,69 @@
     }
 
     TopInput = ()=>{
-        var i = $("#hidden_id").val();
-        var hasblank = false;
-        $("#myModal textarea").each(function(){
-            if($(this).val() == ""){
-                hasblank = true;
-            }
-        })
-        $("#myModal select").each(function(){
-            if($(this).val() == null){
-                hasblank = true;
-            }
-        })
+        // var i = $("#hidden_id").val();
+        // var hasblank = false;
+        // $("#myModal textarea").each(function(){
+        //     if($(this).val() == ""){
+        //         hasblank = true;
+        //     }
+        // })
+        // $("#myModal select").each(function(){
+        //     if($(this).val() == null){
+        //         hasblank = true;
+        //     }
+        // })
         // if(hasblank)
         // {
         //     alert(STR_CHECK_OK);
         //     return;
         // }
-        $(`#cvs${i}`).text($(`#mcvs`).val());
-        $(`#cvtt${i}`).text($(`#mcvtt`).val());
-        $(`#sks${i}`).text($(`#msks`).val());
-        $(`#sktt${i}`).text($(`#msktt`).val());
-        $(`#tbs${i}`).text($(`#mtbs`).val());
-        $(`#tbtt${i}`).text($(`#mtbtt`).val());
-        $(`#tcs${i}`).text($(`#mtcs`).val());
-        $(`#tctt${i}`).text($(`#mtctt`).val());
+        // $(`#cvs${i}`).text($(`#mcvs`).val());
+        // $(`#cvtt${i}`).text($(`#mcvtt`).val());
+        // $(`#sks${i}`).text($(`#msks`).val());
+        // $(`#sktt${i}`).text($(`#msktt`).val());
+        // $(`#tbs${i}`).text($(`#mtbs`).val());
+        // $(`#tbtt${i}`).text($(`#mtbtt`).val());
+        // $(`#tcs${i}`).text($(`#mtcs`).val());
+        // $(`#tctt${i}`).text($(`#mtctt`).val());
 
-        ChangeBackColor($(`#cvs${i}`), BG_WHITE);
-        ChangeBackColor($(`#cvtt${i}`), BG_WHITE);
-        ChangeBackColor($(`#sks${i}`), BG_WHITE);
-        ChangeBackColor($(`#sktt${i}`), BG_WHITE);
-        ChangeBackColor($(`#tbs${i}`), BG_WHITE);
-        ChangeBackColor($(`#tbtt${i}`), BG_WHITE);
-        ChangeBackColor($(`#tcs${i}`), BG_WHITE);
-        ChangeBackColor($(`#tctt${i}`), BG_WHITE);
+        // ChangeBackColor($(`#cvs${i}`), BG_WHITE);
+        // ChangeBackColor($(`#cvtt${i}`), BG_WHITE);
+        // ChangeBackColor($(`#sks${i}`), BG_WHITE);
+        // ChangeBackColor($(`#sktt${i}`), BG_WHITE);
+        // ChangeBackColor($(`#tbs${i}`), BG_WHITE);
+        // ChangeBackColor($(`#tbtt${i}`), BG_WHITE);
+        // ChangeBackColor($(`#tcs${i}`), BG_WHITE);
+        // ChangeBackColor($(`#tctt${i}`), BG_WHITE);
 
-        DeleteDataPopUp1();
+        // DeleteDataPopUp1();
         modal.css("display", "none");
     }
 
     /*---------------------------------------------------------------*/
     /* Sự Kiện chọn ngày */
     /*---------------------------------------------------------------*/
-    ChangeDatePicker = async (e)=>{
+    ChangeDatePicker = async ()=>{
         Delete();
-        // var date = $('#datePicker').val();
-        // var datefm = date.replace(/-/g,"");
+        var date = $('#datePicker').val();
         var datefm = FormatDatePicker($('#datePicker').val());
-        var info = await GetData(datefm, DATA_DAY);
-        console.log(info);
-        DisplayData(info);
+        var gender = $('input[name="gender"]:checked').val();
+        console.log(gender);
+        var {data, datatt} = await GetDataTvtd(datefm, gender);
+        var a = $('#thongtinid');
+        a.empty();
+        if(data.length == datatt.length)
+        {
+            for (let i = 0; i < data.length; i++) {
+                var b = $(`<h4 style="color:blue">${data[i]}</h4>`);
+                a.append(b);
+                var c = $(`<div>${(datatt[i]).replace(/\n/g, "<br>")}</div>`);
+                a.append(c);
+            }
+        }
+        // console.log(info);
+        // DisplayData(info);
     }
-
     
     /*---------------------------------------------------------------*/
     /* Load lần đầu tạo bảng và ngày tháng */
@@ -340,14 +362,13 @@
             a.append(b);
         }
 
-        // var date = $('#datePicker').val();
-        // var datefm = date.replace(/-/g,"");
-        var datefm = FormatDatePicker($('#datePicker').val());
-        console.log(datefm);
-        var info = await GetData(datefm, DATA_DAY);
-        DisplayData(info);
-        console.log("end")
-
+        var date = $('#datePicker').val();
+        if(IsMonday()){
+            var datefm = FormatDatePicker($('#datePicker').val());
+            var info = await GetData(datefm, DATA_WEEK);
+            DisplayData(info);
+            console.log("end")
+        }
     });
 
     /*---------------------------------------------------------------*/
@@ -374,24 +395,44 @@
         }
     }
 
+    /*---------------------------------------------------------------*/
+    /* Kiểm tra hôm nay có phải là thứ 2 */
+    /*---------------------------------------------------------------*/
+    IsMonday = (date) =>{
+        var convertDate = new Date(date);
+        var isMonday = convertDate.getDay() == 1 ? true: false;
+        return isMonday
+    }
+
 
     /*---------------------------------------------------------------*/
     /* Lưu dữ liệu lên Firebase */
     /*---------------------------------------------------------------*/
     Save = async() =>{
+        // Kiểm tra có phải thứ 2 đầu tuần không
+        var date = $('#datePicker').val();
+        
+        if(!IsMonday(date)){
+            alert(STR_CHECK_MONDAY);
+            return;
+        }
+
+        // Kiểm tra tất cả đã điền data chưa
         var hasblank = Check();
         if(hasblank){
             alert(STR_CHECK);
             return;
         }
+
+        // var datefm = date.replace(/-/g,"");
+        var datefm = FormatDatePicker($('#datePicker').val());
+
+        // add data to day in firebase thong tin va sao
         try {
-            // add data to day in firebase thong tin va sao
-            // var date = $('#datePicker').val();
-            // var datefm = date.replace(/-/g,"");
-            var datefm = FormatDatePicker($('#datePicker').val());
+
             for(var i =0; i< CUNG.length; i++)
             {
-                await db.collection('day').doc(datefm).collection(CUNG[i]).doc("data").set({
+                await db.collection('week').doc(datefm).collection(CUNG[i]).doc("data").set({
                     congviec:{
                         sao: Number($(`#cvs${i}`).text()),
                         thongtin: $(`#cvtt${i}`).text()

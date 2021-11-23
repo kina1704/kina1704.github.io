@@ -150,27 +150,37 @@
                     <li class="nav-item">
                         <a class="nav-link" href="./Nam.html">Năm</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="./TuViTronDoi.html">Tử Vi Trọn Đời</a>
+                    </li>
                 </ul>
             </div>
             <div style="margin-top:20px;">
                 <div class="row">
                     <div style="margin: 15px;">
                         <label for="date">Chọn Tháng:</label>
-                        <select id="slcMonth"  onchange="ChangeMonth()">
-                            <option value="thang1">Tháng 1</option>
-                            <option value="thang2">Tháng 2</option>
-                            <option value="thang3">Tháng 3</option>
-                            <option value="thang4">Tháng 4</option>
-                            <option value="thang5">Tháng 5</option>
-                            <option value="thang6">Tháng 6</option>
-                            <option value="thang7">Tháng 7</option>
-                            <option value="thang8">Tháng 8</option>
-                            <option value="thang9">Tháng 9</option>
-                            <option value="thang10">Tháng 10</option>
-                            <option value="thang11">Tháng 11</option>
-                            <option value="thang12">Tháng 12</option>
+                        <select id="slcMonth">
+                            <option value="01">Tháng 1</option>
+                            <option value="02">Tháng 2</option>
+                            <option value="03">Tháng 3</option>
+                            <option value="04">Tháng 4</option>
+                            <option value="05">Tháng 5</option>
+                            <option value="06">Tháng 6</option>
+                            <option value="07">Tháng 7</option>
+                            <option value="08">Tháng 8</option>
+                            <option value="09">Tháng 9</option>
+                            <option value="10">Tháng 10</option>
+                            <option value="11">Tháng 11</option>
+                            <option value="12">Tháng 12</option>
                         </select>
-                        <input type="button" value="Save Data" onclick="Save()" />
+                        <select id="slcYear">
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <input type="button" value="Tìm kiếm" onclick="ChangeMonth()" />
+                       
+                        <input type="button" value="Lưu Data" onclick="Save()" />
+                        Dữ liệu tháng: <span style="font-weight: bold;" id="txthang"></span>
                         <!-- <input type="button" id="btnClear" value="Clear All"  style="margin-left: 5px;" onclick="Clear()" /> -->
                     </div>
                 </div>
@@ -199,7 +209,7 @@
                     <tbody id="data">
                     </tbody>
                 </table>
-                <table class="table table-bordered" style="visibility: hidden;">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th style="width: 100px;">Cung</th>
@@ -232,7 +242,7 @@
     }
     // When the user clicks on the button, open the modal
     OpenPopUp = (i)=>{
-        $(`#title_popup`).text(`Nhập Data ngày cho cung ${CUNG_TITLE[i]}`)
+        $(`#title_popup`).text(`Nhập Data Tháng cho cung ${CUNG_TITLE[i]}`)
         $("#hidden_id").val(i);
         $(`#mcvs`).val($(`#cvs${i}`).text());
         $(`#mcvtt`).val($(`#cvtt${i}`).text());
@@ -308,7 +318,9 @@
     ChangeMonth = async ()=>{
         Delete();
         var month= $("#slcMonth option:selected").val();
-        var info = await GetData(month, DATA_MONTH);
+        var year= $("#slcYear option:selected").val();
+        $("#txthang").text($("#slcMonth option:selected").text());
+        var info = await GetData(month+''+year, DATA_MONTH);
         DisplayData(info);
     }
 
@@ -317,10 +329,9 @@
     /* Load lần đầu tạo bảng và ngày tháng */
     /*---------------------------------------------------------------*/
     $(document).ready(async function () {
-        console.log(GetRamDomColor());
-        console.log(GetRamDomNumber());
         /* set default datetimepicker */
         // $('#datePicker').val(new Date().toJSON().slice(0, 10));
+        /* create table */
         /* create table */
         for(var i =0; i< CUNG.length; i++)
         {
@@ -343,8 +354,8 @@
             var a = $('#data2');
             var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
             var c = $(`<td>${CUNG_TITLE[i]}</td>
-                        <td><span id="mmm${i}">${GetRamDomColor()}</span></td>
-                        <td><span id="smm${i}">${GetRamDomNumber()}</span></td>`);
+                        <td><input type="text" id="mmm${i}" class="color-blue"/></td>
+                        <td><input type="text" id="smm${i}" class="color-blue"/></td>`);
             b.append(c);
             a.append(b);
         }
@@ -352,7 +363,9 @@
         // var date = $('#datePicker').val();
         // var datefm = date.replace(/-/g,"");
         var month= $("#slcMonth option:selected").val();
-        var info = await GetData(month, DATA_MONTH);
+        var year= $("#slcYear option:selected").val();
+        $("#txthang").text($("#slcMonth option:selected").text());
+        var info = await GetData(month+''+year, DATA_MONTH);
         DisplayData(info);
         console.log("end")
 
@@ -362,7 +375,6 @@
     /* Hien Thi Data tu Firebase */
     /*---------------------------------------------------------------*/
     DisplayData = (info) =>  {
-        console.log(info.length);
         if(info != undefined && info.length == 12)
         {
             for(var i =0; i< CUNG.length; i++)
@@ -375,6 +387,8 @@
                 $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
                 $(`#tcs${i}`).text(info[i].tinhcam.sao);
                 $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
+                $(`#mmm${i}`).val(info[i].maumayman);
+                $(`#smm${i}`).val(info[i].somayman);
             }
             Check();
         }
@@ -415,8 +429,8 @@
                         sao: Number($(`#tcs${i}`).text()),
                         thongtin: $(`#tctt${i}`).text()
                     },
-                    somayman:$(`#smm${i}`).text(),
-                    maumayman:$(`#mmm${i}`).text()
+                    somayman:$(`#smm${i}`).val(),
+                    maumayman:$(`#mmm${i}`).val()
                 })
             }
             alert(STR_SAVED);
