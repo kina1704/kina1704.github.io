@@ -400,6 +400,7 @@
     /*---------------------------------------------------------------*/
     Save = async() =>{
         var month= $("#slcMonth option:selected").val();
+        var year= $("#slcYear option:selected").val();
         // Kiểm tra tất cả đã điền data chưa
         var hasblank = Check();
         if(hasblank){
@@ -412,7 +413,7 @@
 
             for(var i =0; i< CUNG.length; i++)
             {
-                await db.collection('month').doc(month).collection(CUNG[i]).doc("data").set({
+                await db.collection('month').doc(month+''+year).collection(CUNG[i]).doc("data").set({
                     congviec:{
                         sao: Number($(`#cvs${i}`).text()),
                         thongtin: $(`#cvtt${i}`).text()
