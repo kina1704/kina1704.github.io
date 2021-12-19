@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="./css/common.css">
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
     
         <!-- jQuery library -->
         <script src="./js/jquery.min.js"></script>
@@ -40,91 +41,22 @@
     <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <input type="hidden" value="" id="hidden_id"/>
+            <input type="hidden" value="" id="hidden_type"/>
+            <input type="hidden" value="" id="hidden_i"/>
             <span class="close" id="close">&times;</span>
             <br/>
             <div>
-                <h2 id="title_popup" class="font-weight-bold">Title</h2>
+                <h2 id="title_popup" class="font-weight-bold"></h2>
             </div>
             <div class="pd-l-20">
                 <div class="column" class="container">
-                    <div  class="row font-weight-bold f-c-blue">Công Việc</div>
-                    <div class="row pd-l-15">
-                        <div class="w-100px">Sao:</div>
-                        <select id="mcvs" class="w-100px">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="row pd-l-15"> 
-                        <div class="w-100px" >Thông tin:</div>
-                        <textarea  class="tarea-size" id="mcvtt"></textarea>
-                    </div>
+                    <div  class="row font-weight-bold f-c-blue">Tiêu Đề:</div>
+                    <textarea  class="tarea-size" id="tieudeid"></textarea>
+                    <div  class="row font-weight-bold f-c-blue">Nội dung:</div>
+                    <textarea  class="tarea-size-tuvi" id="ndid"></textarea>
                 </div>
             </div>
-            <div class="pd-l-20">
-                <div class="column" class="container">
-                    <div  class="row font-weight-bold f-c-blue">Sức khỏe</div>
-                    <div class="row pd-l-15">
-                        <div  class="w-100px">Sao:</div>
-                        <select id="msks" class="w-100px">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="row pd-l-15"> 
-                        <div class="w-100px">Thông tin:</div>
-                        <textarea   class="tarea-size" id="msktt"></textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="pd-l-20">
-                <div class="column" class="container">
-                    <div  class="row font-weight-bold f-c-blue">Tiền Bạc</div>
-                    <div class="row pd-l-15">
-                        <div  class="w-100px">Sao:</div>
-                        <select id="mtbs" class="w-100px">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="row pd-l-15"> 
-                        <div class="w-100px ">Thông tin:</div>
-                        <textarea   class="tarea-size" id="mtbtt"></textarea>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="pd-l-20">
-                <div class="column" class="container">
-                    <div  class="row font-weight-bold f-c-blue">Tình Cảm</div>
-                    <div class="row pd-l-15">
-                        <div  class="w-100px">Sao:</div>
-                        <select id="mtcs" class="w-100px">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="row pd-l-15"> 
-                        <div class="w-100px">Thông tin:</div>
-                        <textarea   class="tarea-size" id="mtctt"></textarea>
-                    </div>
-                    
-                </div>
-            </div>
-            <div> <button class="w-100px" onclick="TopInput()">OK</button></div>
+            <div> <button class="w-100px" onclick="Save()">OK</button></div>
         </div>
     </div>
     <!------------------------------------ MODAL POPUP TOP --------------------------------------------------->
@@ -157,8 +89,10 @@
             <div style="margin-top:20px;">
                 <div class="row">
                     <div style="margin: 15px;">
+                        <label for="quantity">Vui lòng nhập năm từ 1921 đến 2021:</label>
+                        <input type="number" id="namid" name="quantity" min="1921" max="2021" value="1921">
                         <label for="date">Chọn ngày tháng năm sinh:</label>
-                        <input id="datePicker" type="date" name="datePicker" />
+                        <!-- <input id="datePicker" type="date" name="datePicker" /> -->
                         <!-- <input type="button" id="btnClear" value="Clear All"  style="margin-left: 5px;" onclick="Clear()" /> -->
                     </div>
                     <div style="margin: 15px;">
@@ -171,48 +105,23 @@
                     </div>
                 </div>
             </div>
+            <div>
+                <button type="submit" class="btn btn-link" onclick="OpenPopUp(0,0)">
+                    <span class="color-green">THÊM: </span><i class="color-green fa fa-plus" aria-hidden="true"></i>
+                </button>
+            </div>
             <div id ="thongtinid">
-                <!-- <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th rowspan="2" style="width: 100px;">Cung</th>
-                            <th colspan="2">Công Việc</th>
-                            <th colspan="2">Sức Khỏe</th>
-                            <th colspan="2">Tiền Bạc</th>
-                            <th colspan="2">Tình Cảm</th>
-                        </tr>
-                        <tr>
-                            <th>Sao</th>
-                            <th>Thông Tin</th>
-                            <th>Sao</th>
-                            <th>Thông Tin</th>
-                            <th>Sao</th>
-                            <th>Thông Tin</th>
-                            <th>Sao</th>
-                            <th>Thông Tin</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                    </tbody>
-                </table>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width: 100px;">Cung</th>
-                            <th>Màu May Mắn</th>
-                            <th>Số May Mắn</th>
-                        </tr>
-                    </thead>
-                    <tbody id="data2">
-                    </tbody>
-                </table> -->
             </div>
         </div>       
     </div>
 </body>
 </html>
 <script>
-
+    $('#namid').on('input', function() {
+        if ($('#namid').val().length > 4) {
+            $('#namid').val($('#namid').val().slice(0,4))
+        }
+    });
     // Get the modal
     /*---------------------------------------------------------------*/
     /* Xử lý phần top modal */
@@ -227,22 +136,18 @@
         }
     }
     // When the user clicks on the button, open the modal
-    OpenPopUp = (i)=>{
-        // var date = $('#datePicker').val();
-        // if(!IsMonday(date)){
-        //     alert(STR_CHECK_MONDAY);
-        //     return;
-        // }
-        // $(`#title_popup`).text(`Nhập Data ngày cho cung ${CUNG_TITLE[i]}`)
-        // $("#hidden_id").val(i);
-        // $(`#mcvs`).val($(`#cvs${i}`).text());
-        // $(`#mcvtt`).val($(`#cvtt${i}`).text());
-        // $(`#msks`).val($(`#sks${i}`).text());
-        // $(`#msktt`).val($(`#sktt${i}`).text());
-        // $(`#mtbs`).val($(`#tbs${i}`).text());
-        // $(`#mtbtt`).val($(`#tbtt${i}`).text());
-        // $(`#mtcs`).val($(`#tcs${i}`).text());
-        // $(`#mtctt`).val($(`#tctt${i}`).text());
+    OpenPopUp = (i,type)=>{
+        if(type == 0)
+        {
+            $("#title_popup").text("Thêm dữ liệu");
+        }
+        else if(type == 1) //sửa dữ liệu
+        {
+            $(`#tieudeid`).val($(`#ttid${i}`).text());
+            $(`#ndid`).val($(`#ndid${i}`).text());
+        }
+        $(`#hidden_type`).val(type);
+        $(`#hidden_i`).val(i);
         modal.css("display", "block");
     }
     
@@ -254,52 +159,14 @@
 
     DeleteDataPopUp1 = () =>{
         var textarea = $("#myModal textarea");
-        var select = $("#myModal select");
-        select.each(function(){
-            $(this).val(1);
-        })
+        $(`#hidden_type`).val("");
+        $(`#hidden_i`).val("");
         textarea.each(function(){
             $(this).val("");
         })
     }
 
     TopInput = ()=>{
-        // var i = $("#hidden_id").val();
-        // var hasblank = false;
-        // $("#myModal textarea").each(function(){
-        //     if($(this).val() == ""){
-        //         hasblank = true;
-        //     }
-        // })
-        // $("#myModal select").each(function(){
-        //     if($(this).val() == null){
-        //         hasblank = true;
-        //     }
-        // })
-        // if(hasblank)
-        // {
-        //     alert(STR_CHECK_OK);
-        //     return;
-        // }
-        // $(`#cvs${i}`).text($(`#mcvs`).val());
-        // $(`#cvtt${i}`).text($(`#mcvtt`).val());
-        // $(`#sks${i}`).text($(`#msks`).val());
-        // $(`#sktt${i}`).text($(`#msktt`).val());
-        // $(`#tbs${i}`).text($(`#mtbs`).val());
-        // $(`#tbtt${i}`).text($(`#mtbtt`).val());
-        // $(`#tcs${i}`).text($(`#mtcs`).val());
-        // $(`#tctt${i}`).text($(`#mtctt`).val());
-
-        // ChangeBackColor($(`#cvs${i}`), BG_WHITE);
-        // ChangeBackColor($(`#cvtt${i}`), BG_WHITE);
-        // ChangeBackColor($(`#sks${i}`), BG_WHITE);
-        // ChangeBackColor($(`#sktt${i}`), BG_WHITE);
-        // ChangeBackColor($(`#tbs${i}`), BG_WHITE);
-        // ChangeBackColor($(`#tbtt${i}`), BG_WHITE);
-        // ChangeBackColor($(`#tcs${i}`), BG_WHITE);
-        // ChangeBackColor($(`#tctt${i}`), BG_WHITE);
-
-        // DeleteDataPopUp1();
         modal.css("display", "none");
     }
 
@@ -308,8 +175,9 @@
     /*---------------------------------------------------------------*/
     ChangeDatePicker = async ()=>{
         Delete();
-        var date = $('#datePicker').val();
-        var datefm = FormatDatePicker($('#datePicker').val());
+        // var date = $('#datePicker').val();
+        // var datefm = FormatDatePicker($('#datePicker').val());
+        var datefm = $('#namid').val();
         var gender = $('input[name="gender"]:checked').val();
         console.log(gender);
         var {data, datatt} = await GetDataTvtd(datefm, gender);
@@ -318,9 +186,17 @@
         if(data.length == datatt.length)
         {
             for (let i = 0; i < data.length; i++) {
-                var b = $(`<h4 style="color:blue">${data[i]}</h4>`);
+                var b = $(`<div class="row">
+                    <h4 style="color:blue" id="ttid${i}">${data[i]}</h4>
+                        <button type="submit" class="btn btn-link" onclick="DeleteFb(${i})">
+                            <span class="color-red ">XÓA:</span> <i class="color-red fa fa-remove"></i>
+                        </button>
+                        <button type="submit" class="btn btn-link"  onclick="OpenPopUp(${i},1)">
+                            <span class="color-orange">SỬA:</span> <i class="color-orange fa fa-edit"></i>
+                        </button>
+                    </div>`);
                 a.append(b);
-                var c = $(`<div>${(datatt[i]).replace(/\n/g, "<br>")}</div>`);
+                var c = $(`<div id="ndid${i}">${(datatt[i]).replace(/\n/g, "<br>")}</div>`);
                 a.append(c);
             }
         }
@@ -332,42 +208,28 @@
     /* Load lần đầu tạo bảng và ngày tháng */
     /*---------------------------------------------------------------*/
     $(document).ready(async function () {
-        /* set default datetimepicker */
-        $('#datePicker').val(new Date().toJSON().slice(0, 10));
-        /* create table */
-        for(var i =0; i< CUNG.length; i++)
+        var datefm = $('#namid').val();
+        var gender = $('input[name="gender"]:checked').val();
+        console.log(gender);
+        var {data, datatt} = await GetDataTvtd(datefm, gender);
+        var a = $('#thongtinid');
+        a.empty();
+        if(data.length == datatt.length)
         {
-            var a = $('#data');
-            var b = $(`<tr id="${CUNG[i]}_1"></tr>`);
-            var c = $(`<td><a id="myBtn_1_${i}" href="javascript:OpenPopUp(${i})">${CUNG_TITLE[i]}</a></td>
-                        <td><span id="cvs${i}"></span></td>
-                        <td><span id="cvtt${i}"></span></td>
-                        <td><span id="sks${i}"></span></td>
-                        <td><span id="sktt${i}"></span></td>
-                        <td><span id="tbs${i}"></span></td>
-                        <td><span id="tbtt${i}"></span></td>
-                        <td><span id="tcs${i}"></span></td>
-                        <td><span id="tctt${i}"></span></td>`);
-            b.append(c);
-            a.append(b);
-        }
-        for(var i =0; i< CUNG.length; i++)
-        {
-            var a = $('#data2');
-            var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
-            var c = $(`<td>${CUNG_TITLE[i]}</td>
-                        <td><input type="text" id="mmm${i}" class="color-blue"/></td>
-                        <td><input type="text" id="smm${i}" class="color-blue"/></td>`);
-            b.append(c);
-            a.append(b);
-        }
-
-        var date = $('#datePicker').val();
-        if(IsMonday()){
-            var datefm = FormatDatePicker($('#datePicker').val());
-            var info = await GetData(datefm, DATA_WEEK);
-            DisplayData(info);
-            console.log("end")
+            for (let i = 0; i < data.length; i++) {
+                var b = $(`<div class="row">
+                            <h4 style="color:blue" id="ttid${i}">${data[i]}</h4>
+                            <button type="submit" class="btn btn-link" onclick="DeleteFb(${i})">
+                                <span class="color-red ">XÓA:</span> <i class="color-red fa fa-remove"></i>
+                            </button>
+                            <button type="submit" class="btn btn-link" onclick="OpenPopUp(${i},1)">
+                                <span class="color-orange">SỬA:</span> <i class="color-orange fa fa-edit"></i>
+                            </button>
+                        </div>`);
+                a.append(b);
+                var c = $(`<div id="ndid${i}">${(datatt[i]).replace(/\n/g, "<br>")}</div>`);
+                a.append(c);
+            }
         }
     });
 
@@ -375,24 +237,6 @@
     /* Hien Thi Data tu Firebase */
     /*---------------------------------------------------------------*/
     DisplayData = (info) =>  {
-        console.log(info.length);
-        if(info != undefined && info.length == 12)
-        {
-            for(var i =0; i< CUNG.length; i++)
-            {
-                $(`#cvs${i}`).text(info[i].congviec.sao);
-                $(`#cvtt${i}`).text(info[i].congviec.thongtin);
-                $(`#sks${i}`).text(info[i].suckhoe.sao);
-                $(`#sktt${i}`).text(info[i].suckhoe.thongtin);
-                $(`#tbs${i}`).text(info[i].tienbac.sao);
-                $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
-                $(`#tcs${i}`).text(info[i].tinhcam.sao);
-                $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
-                $(`#mmm${i}`).val(info[i].maumayman);
-                $(`#smm${i}`).val(info[i].somayman);
-            }
-            Check();
-        }
     }
 
     /*---------------------------------------------------------------*/
@@ -409,55 +253,67 @@
     /* Lưu dữ liệu lên Firebase */
     /*---------------------------------------------------------------*/
     Save = async() =>{
-        // Kiểm tra có phải thứ 2 đầu tuần không
-        var date = $('#datePicker').val();
-        
-        if(!IsMonday(date)){
-            alert(STR_CHECK_MONDAY);
+        var type = $(`#hidden_type`).val();
+        var i = $(`#hidden_i`).val();
+        var td = $(`#tieudeid`).val().trim();
+        var nd = $(`#ndid`).val().trim();
+        if(td == "" || nd=="")
+        {
+            alert(STR_CHECK_OK);
             return;
         }
-
-        // Kiểm tra tất cả đã điền data chưa
-        var hasblank = Check();
-        if(hasblank){
-            alert(STR_CHECK);
-            return;
-        }
-
-        // var datefm = date.replace(/-/g,"");
-        var datefm = FormatDatePicker($('#datePicker').val());
-
-        // add data to day in firebase thong tin va sao
-        try {
-
-            for(var i =0; i< CUNG.length; i++)
-            {
-                await db.collection('week').doc(datefm).collection(CUNG[i]).doc("data").set({
-                    congviec:{
-                        sao: Number($(`#cvs${i}`).text()),
-                        thongtin: $(`#cvtt${i}`).text()
-                    },
-                    suckhoe:{
-                        sao: Number($(`#sks${i}`).text()),
-                        thongtin: $(`#sktt${i}`).text()
-                    },
-                    tienbac:{
-                        sao: Number($(`#tbs${i}`).text()),
-                        thongtin: $(`#tbtt${i}`).text()
-                    },
-                    tinhcam:{
-                        sao: Number($(`#tcs${i}`).text()),
-                        thongtin: $(`#tctt${i}`).text()
-                    },
-                    somayman:$(`#smm${i}`).val(),
-                    maumayman:$(`#mmm${i}`).val()
-                })
+        var result = window.confirm("Xác nhận lưu dữ liệu?");
+            if( result ) {
+                var datefm = $('#namid').val();
+                var gender = $('input[name="gender"]:checked').val();
+                var {data, datatt} = await GetDataTvtd(datefm, gender);
+                if(data.length == datatt.length)
+                {
+                    if(type==0)
+                    {
+                        await db.collection('lifehoros').doc(""+datefm).collection(""+gender).doc("data").set({
+                            thongtin:JSON.stringify([...datatt,nd]),
+                            tieude:JSON.stringify([...data,td])                        
+                        })
+                    }
+                    else if(type==1)
+                    {
+                        data[i] = td;
+                        datatt[i] = nd;
+                        await db.collection('lifehoros').doc(""+datefm).collection(""+gender).doc("data").set({
+                            thongtin:JSON.stringify([...datatt]),
+                            tieude:JSON.stringify([...data])                        
+                        })
+                    }
+                }
+                alert(STR_SAVED);
+                DeleteDataPopUp1();
+                // array.splice(index, 1);
+                modal.css("display", "none");
+                ChangeDatePicker();
             }
-            alert(STR_SAVED);
-            // Delete();
-        } catch (err) {
-            alert(STR_ERR);
-            console.log(err.stack)
-        }
+    }
+
+    /*---------------------------------------------------------------*/
+    /* Xóa dữ liệu khỏi Firebase */
+    /*---------------------------------------------------------------*/
+    DeleteFb = async(i) =>{
+        var result = window.confirm(STR_DELETE);
+            if( result ) {
+                var datefm = $('#namid').val();
+                var gender = $('input[name="gender"]:checked').val();
+                var {data, datatt} = await GetDataTvtd(datefm, gender);
+                if(data.length == datatt.length)
+                {
+                    data.splice(i, 1);
+                    datatt.splice(i, 1);
+                    await db.collection('lifehoros').doc(""+datefm).collection(""+gender).doc("data").set({
+                            thongtin:JSON.stringify([...datatt]),
+                            tieude:JSON.stringify([...data])                        
+                        })
+                }
+                alert(STR_DELETED);
+            }
+            ChangeDatePicker();
     }
 </script>

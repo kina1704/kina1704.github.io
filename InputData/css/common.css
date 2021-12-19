@@ -50,6 +50,10 @@ textarea{
     width: 600px;
     height: 70px;
 }
+.tarea-size-tuvi{
+    width: 1000px;
+    height: 500px;
+}
 
 table td input, table td span{
     text-overflow:ellipsis;
@@ -115,4 +119,20 @@ div{
 
 .color-blue{
     color: blue;
+}
+
+
+.color-red{
+    color: red;
+    font-weight: bold;
+}
+
+.color-green{
+    color: green;
+    font-weight: bold;
+}
+
+.color-orange{
+    color: orange;
+    font-weight: bold;
 }

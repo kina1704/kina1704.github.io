@@ -4,6 +4,7 @@
 var CUNG = ['bachduong','kimnguu','songtu','cugiai','sutu','xunu','thienbinh','hocap','nhanma','maket','baobinh','songngu'];
 var CUNG_TITLE = ['Bạch Dương', 'Kim Ngưu', 'Song Tử', 'Cự Giải', 'Sư Tử', 'Xử Nữ', 'Thiên Bình', 'Bọ Cạp', 'Nhân Mã', 'Ma Kết', 'Bảo Bình', 'Song Ngư'];
 var STR_SAVED = "Đã lưu Data vào firebase!";
+var STR_DELETED = "Đã xóa Data khỏi firebase!";
 var STR_ERR = "Dữ liệu sai hoặc firebase có vấn đề!";
 var STR_CHECK = "Vui lòng điền đầy đủ trước khi save";
 var STR_CHECK_OK = "Vui lòng điền đầy đủ trước khi Ok";
@@ -123,7 +124,7 @@ GetDataTvtd = async (d, gender)=>{
     console.log(d+" "+ gender)
     var data = "";
     var datatt = "";
-    await db.collection("lifehoro").doc(d).collection(""+gender).get().then(querySnapshot=>{
+    await db.collection("lifehoros").doc(d).collection(""+gender).get().then(querySnapshot=>{
         querySnapshot.forEach((doc) => {
             console.log(doc.data().tieude);
             data = JSON.parse(doc.data().tieude);
