@@ -396,6 +396,10 @@
             alert(STR_CHECK);
             return;
         }
+        var result = window.confirm("Xác nhận lưu dữ liệu?");
+        if( !result ) {
+            result;
+        }
         try {
             // add data to day in firebase thong tin va sao
             // var date = $('#datePicker').val();

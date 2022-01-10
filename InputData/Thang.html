@@ -215,6 +215,8 @@
                             <th style="width: 100px;">Cung</th>
                             <th>Màu May Mắn</th>
                             <th>Số May Mắn</th>
+                            <th>Ngày May Mắn</th>
+                            <th>Ngày Xui Rủi</th>
                         </tr>
                     </thead>
                     <tbody id="data2">
@@ -355,7 +357,9 @@
             var b = $(`<tr id="${CUNG[i]}_2"></tr>`);
             var c = $(`<td>${CUNG_TITLE[i]}</td>
                         <td><input type="text" id="mmm${i}" class="color-blue"/></td>
-                        <td><input type="text" id="smm${i}" class="color-blue"/></td>`);
+                        <td><input type="text" id="smm${i}" class="color-blue"/></td>
+                        <td><input type="text" id="nmm${i}" class="color-blue"/></td>
+                        <td><input type="text" id="nxr${i}" class="color-blue"/></td>`);
             b.append(c);
             a.append(b);
         }
@@ -389,6 +393,8 @@
                 $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
                 $(`#mmm${i}`).val(info[i].maumayman);
                 $(`#smm${i}`).val(info[i].somayman);
+                $(`#nmm${i}`).val(info[i].nmm);
+                $(`#nxr${i}`).val(info[i].nxr);
             }
             Check();
         }
@@ -403,6 +409,8 @@
             $(`#tctt${i}`).text("");
             $(`#mmm${i}`).val("");
             $(`#smm${i}`).val("");
+            $(`#nmm${i}`).val("");
+            $(`#nxr${i}`).val("");
         }
     }
 
@@ -418,6 +426,11 @@
         if(hasblank){
             alert(STR_CHECK);
             return;
+        }
+
+        var result = window.confirm("Xác nhận lưu dữ liệu?");
+        if( !result ) {
+            result;
         }
 
         // add data to day in firebase thong tin va sao
@@ -443,7 +456,9 @@
                         thongtin: $(`#tctt${i}`).text()
                     },
                     somayman:$(`#smm${i}`).val(),
-                    maumayman:$(`#mmm${i}`).val()
+                    maumayman:$(`#mmm${i}`).val(),
+                    nmm:$(`#nmm${i}`).val(),
+                    nxr:$(`#nxr${i}`).val()
                 })
             }
             alert(STR_SAVED);
