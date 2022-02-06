@@ -269,12 +269,17 @@
                 var {data, datatt} = await GetDataTvtd(datefm, gender);
                 if(data.length == datatt.length)
                 {
-                    if(type==0)
+                    if(type==0 && data.length != 0)
                     {
                         await db.collection('lifehoros').doc(""+datefm).collection(""+gender).doc("data").set({
                             thongtin:JSON.stringify([...datatt,nd]),
                             tieude:JSON.stringify([...data,td])                        
                         })
+                        alert(STR_SAVED);
+                        DeleteDataPopUp1();
+                        // array.splice(index, 1);
+                        modal.css("display", "none");
+                        ChangeDatePicker();
                     }
                     else if(type==1)
                     {
@@ -284,13 +289,15 @@
                             thongtin:JSON.stringify([...datatt]),
                             tieude:JSON.stringify([...data])                        
                         })
+                        alert(STR_SAVED);
+                        DeleteDataPopUp1();
+                        // array.splice(index, 1);
+                        modal.css("display", "none");
+                        ChangeDatePicker();
+                    } else {
+                        alert(STR_ERR);
                     }
                 }
-                alert(STR_SAVED);
-                DeleteDataPopUp1();
-                // array.splice(index, 1);
-                modal.css("display", "none");
-                ChangeDatePicker();
             }
     }
 
