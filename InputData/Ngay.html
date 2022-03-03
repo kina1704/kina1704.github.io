@@ -101,7 +101,6 @@
                         <div class="w-100px ">Thông tin:</div>
                         <textarea class="tarea-size" id="mtbtt"></textarea>
                     </div>
-                    
                 </div>
             </div>
             <div class="pd-l-20">
@@ -122,6 +121,15 @@
                         <textarea class="tarea-size" id="mtctt"></textarea>
                     </div>
                     
+                </div>
+            </div>
+            <div class="pd-l-20">
+                <div class="column" class="container">
+                    <div  class="row font-weight-bold f-c-blue">Tóm tắt</div>
+                    <div class="row pd-l-15"> 
+                        <div class="w-100px" ></div>
+                        <textarea class="tarea-size" id="tomtat"></textarea>
+                    </div>
                 </div>
             </div>
             <div> <button class="w-100px" onclick="TopInput()">OK</button></div>
@@ -174,6 +182,7 @@
                             <th colspan="2">Sức Khỏe</th>
                             <th colspan="2">Tiền Bạc</th>
                             <th colspan="2">Tình Cảm</th>
+                            <th rowspan="2">Tóm Tắt</th>
                         </tr>
                         <tr>
                             <th>Sao</th>
@@ -232,6 +241,7 @@
         $(`#mtbtt`).val($(`#tbtt${i}`).text());
         $(`#mtcs`).val($(`#tcs${i}`).text());
         $(`#mtctt`).val($(`#tctt${i}`).text());
+        $(`#tomtat`).val($(`#content${i}`).text());
         modal.css("display", "block");
     }
     
@@ -278,6 +288,7 @@
         $(`#tbtt${i}`).text($(`#mtbtt`).val());
         $(`#tcs${i}`).text($(`#mtcs`).val());
         $(`#tctt${i}`).text($(`#mtctt`).val());
+        $(`#content${i}`).text($(`#tomtat`).val());
 
         ChangeBackColor($(`#cvs${i}`), BG_WHITE);
         ChangeBackColor($(`#cvtt${i}`), BG_WHITE);
@@ -287,6 +298,7 @@
         ChangeBackColor($(`#tbtt${i}`), BG_WHITE);
         ChangeBackColor($(`#tcs${i}`), BG_WHITE);
         ChangeBackColor($(`#tctt${i}`), BG_WHITE);
+        ChangeBackColor($(`#content${i}`), BG_WHITE);
 
         DeleteDataPopUp1();
         modal.css("display", "none");
@@ -325,7 +337,8 @@
                         <td><span id="tbs${i}"></span></td>
                         <td><span id="tbtt${i}"></span></td>
                         <td><span id="tcs${i}"></span></td>
-                        <td><span id="tctt${i}"></span></td>`);
+                        <td><span id="tctt${i}"></span></td>
+                        <td><span id="content${i}"></span></td>`);
             b.append(c);
             a.append(b);
         }
@@ -367,6 +380,7 @@
                 $(`#tbtt${i}`).text(info[i].tienbac.thongtin);
                 $(`#tcs${i}`).text(info[i].tinhcam.sao);
                 $(`#tctt${i}`).text(info[i].tinhcam.thongtin);
+                $(`#content${i}`).text(info[i].content);
                 $(`#mmm${i}`).val(info[i].maumayman);
                 $(`#smm${i}`).val(info[i].somayman);
             }
@@ -381,6 +395,7 @@
             $(`#tbtt${i}`).text("");
             $(`#tcs${i}`).text("");
             $(`#tctt${i}`).text("");
+            $(`#content${i}`).text("");
             $(`#mmm${i}`).val("");
             $(`#smm${i}`).val("");
         }
@@ -424,6 +439,7 @@
                         sao: Number($(`#tcs${i}`).text()),
                         thongtin: $(`#tctt${i}`).text()
                     },
+                    content:$(`#content${i}`).text(),
                     somayman:$(`#smm${i}`).val(),
                     maumayman:$(`#mmm${i}`).val()
                 })
