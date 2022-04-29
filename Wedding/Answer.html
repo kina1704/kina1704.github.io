@@ -543,8 +543,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
     <meta name="robots" content="noindex,nofollow">
-    <link rel="shortcut icon" href="https://sample.weddingday.jp/images/favicon.png">
-    <link rel="apple-touch-icon" type="image/png" href="https://sample.weddingday.jp/images/favicon.png">
+    <link rel="shortcut icon" href="./avatar/cl.png">
+    <link rel="apple-touch-icon" type="image/png" href="./avatar/cl.png">
     <title>Canh &amp; Linh</title>
     <meta name="description" content="Canh &amp; Linh">
     <meta property="og:type" content="website">
@@ -568,7 +568,7 @@
         content="https://default.weddingday.jp/template/v3_feminine_orange/images/default_image1.jpg">
     <link rel="stylesheet" href="./Answer_files/style.css">
     <script async="" src="./Answer_files/analytics.js.download"></script>
-    <script>
+    <!-- <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -582,7 +582,7 @@
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
         ga('create', 'UA-49021614-1', 'auto');
         ga('send', 'pageview');
-    </script>
+    </script> -->
 </head>
 
 <body class="invitation v2_feminine_a wtype_20" data-aos-easing="ease" data-aos-duration="400" data-aos-delay="0">
@@ -626,6 +626,14 @@
     <!-- svg icons -->
     <div class="container">
         <main data-view="entry" class="entry">
+            <div class="header">
+                <div class="switch" id="div_toggle_id">
+                    <input id="language-toggle" class="check-toggle check-toggle-round-flat" type="checkbox">
+                    <label for="language-toggle"></label>
+                    <span class="on">Tiếng Việt</span>
+                    <span class="off">日本語</span>
+                    </div>
+            </div>
             <script type="application/json" data-roll="is_payable">false</script>
             <script type="application/json" data-roll="wtype">20</script>
             <script type="application/json" data-roll="tickets_json">[]</script>
@@ -637,7 +645,7 @@
             <div class="main_content">
                 <div class="overview">
                     <div class="overview__head"><img src="./Answer_files/title.png" alt="Wedding Invitation"></div>
-                    <h1 class="overview__title">Canh &amp; Linh</h1>
+                    <h1 class="overview__title" id="wedding_id" style="color:red">Canh &amp; Linh</h1>
                     <div class="overview__line"><img src="./Answer_files/line.png" alt=""></div>
                 </div>
                 <form id="entry_form" accept-charset="UTF-8" action="https://sample.weddingday.jp/entry/create"
@@ -645,29 +653,50 @@
                     <div class="page_container">
                         <section class="page input-form" id="traloi">
                             <section>
-                                <p class="require_text">*は必須項目です</p>
+                                <p class="require_text"></p>
+                                <p class="require_text" id="need_id">*は必須項目です</p>
                                 <div id="entry_entry" class="l-form__row">
-                                    <div class="l-form__group"><label class="form-label req">いずれかをお選びください</label> <label
-                                            class="form-input-radio-wrapper"><input type="radio" name="entry"
-                                                value="ご出席"><span><span
-                                                    class="small_english">ACCEPTS</span><br>ご出席</span></label> <label
-                                            class="form-input-radio-wrapper"><input type="radio" name="entry"
-                                                value="ご欠席"><span><span
-                                                    class="small_english">DECLINES</span><br>ご欠席</span></label></div>
+                                    <div class="l-form__group">
+                                        <label class="form-label req" id="choise_id">いずれかをお選びください</label>
+                                        <label class="form-input-radio-wrapper">
+                                            <input type="radio" name="entry" id="input_accepts_id" value="ご出席">
+                                            <span id="accepts_id" ><br/>
+                                                ご出席
+                                            </span>
+                                        </label>
+                                        <label class="form-input-radio-wrapper">
+                                            <input type="radio" name="entry" id="input_declines_id" value="ご欠席">
+                                            <span id="declines_id"><br/>
+                                                ご欠席
+                                            </span>
+                                        </label>
+                                    </div>
                                 </div>
                                 <!---->
-                                <div id="entry_name" class="l-form__row">
+                                <!-- <div id="entry_name" class="l-form__row">
                                     <div class="l-form__group"><label class="form-label req"><span
                                                 class="large_english">Name</span><br>お名前</label>
+                                    </div>
+                                </div> -->
+                                <div style="display: flex;justify-content: center;　margin-top: 2.75em;">
+                                    <img src="./avatar/avatar.png" alt="Avatar" class="avatar" id="avatar">
+                                </div>
+                                <div id="entry_name" class="l-form__row">
+                                    <div class="l-form__group">
                                         <div class="l-form__input--flex">
-                                            <input id = "ho" type="text" name="last_name" maxlength="255" placeholder="姓" class=""> 
-                                            <input id = "ten" type="text" name="first_name" maxlength="255" placeholder="名" class=""></div>
+                                            <input style = "border-width: 0 0 1px 0 ; outline: 0; text-align: center;" placeholder="名前*" list="browsers"
+                                                name="browser" id="browser" oninput='onInput()'>
+                                            <datalist id="browsers">
+                                            </datalist>
+                                            <!-- <input id = "ho" type="text" name="last_name" maxlength="255" placeholder="姓" class=""> 
+                                            <input id = "ten" type="text" name="first_name" maxlength="255" placeholder="名" class=""> -->
+                                        </div>
                                     </div>
                                 </div>
                                 <div id="entry_u1" class="l-form__row">
-                                    <div class="l-form__group"><label class="form-label "><span
-                                                class="large_english">Message</span><br>メッセージ</label> 
-                                                <textarea  id = "memo" name="free1" rows="3" maxlength="255" placeholder="ご自由にご記入ください"></textarea>
+                                    <div class="l-form__group"><label class="form-label " id="mesage_id">メッセージ</label>
+                                        <textarea id="memo" name="free1" rows="3" maxlength="255"
+                                            placeholder="ご自由にご記入ください" ></textarea>
                                     </div>
                                 </div>
                                 <!-- <div class="add_guest"><a href="javascript:void(0)" class="arrow"><span
@@ -675,136 +704,40 @@
                                             class="icon icon-user-plus">
                                             <use xlink:href="#icon-user-plus"></use>
                                         </svg> お連れ様を追加する</a></div> -->
-                                <div class="submit"><a href="javascript:Traloicauhoi();" class="button">確認する</a></div>
+                                <div class="submit"><a href="javascript:Traloicauhoi();" class="button" id="buttonans_id">確認する</a></div>
                                 <div class="back_link"><a href="./Canh & Linh.html" class="arrow"><svg
                                             class="icon icon-circle-left">
                                             <use xlink:href="#icon-circle-left"></use>
-                                        </svg> 戻る</a></div>
+                                        </svg><span id="back_id">戻る</span></a></div>
                             </section>
                         </section>
-                        <section class="page input-confirm"  id="confirm" style="display: none;">
+                        <section class="page input-confirm" id="confirm" style="display: none;">
                             <section>
-                                <h2>入力確認画面</h2>
+                                <h2 id="conffirm_id" style="color:red">入力確認画面</h2>
                                 <!---->
-                                <div class="column"><label class="column__title">ご出席/ご欠席</label>
+                                <div class="column"><label class="column__title"  id="acceptdecline_id" style="color:blue">ご出席/ご欠席</label>
                                     <div class="column__content">
                                         <p id="dihayko"></p>
                                     </div>
                                 </div>
-                                <div class="column"><label class="column__title">お名前</label>
+                                <div class="column"><label class="column__title"  id="name2_id"  style="color:blue">お名前</label>
+                                    <div style="display: flex;justify-content: center;">
+                                        <img src="./avatar/avatar.png" alt="Avatar" class="avatar" id="avatar2">
+                                    </div>
                                     <div class="column__content">
-                                        <p id = "hoten">&nbsp;</p>
+                                        <p id="hoten">&nbsp;</p>
                                     </div>
                                 </div>
-                                <div class="column"><label class="column__title">メッセージ</label>
+                                <div class="column"><label class="column__title"  id="Message2_id"  style="color:blue">メッセージ</label>
                                     <div class="column__content">
-                                        <p id = "memo1">&nbsp;</p>
+                                        <p id="memo1">&nbsp;</p>
                                     </div>
                                 </div>
-                                <div class="confirm_button"><a href="./thanks.html" class="button">回答する</a></div>
-                                <div class="back_link"><a href="javascript:$('#confirm').hide();$('#traloi').show();" class="arrow"><svg
-                                            class="icon icon-circle-left">
+                                <div class="confirm_button"><a href="javascript:XacNhanHoanTat();" class="button" id="btnconf_id">回答する</a></div>
+                                <div class="back_link"><a href="javascript:$('#confirm').hide();$('#traloi').show();"
+                                        class="arrow"><svg class="icon icon-circle-left">
                                             <use xlink:href="#icon-circle-left"></use>
-                                        </svg> 修正</a></div>
-                            </section>
-                        </section>
-                        <section class="page input-credit" style="display: none;">
-                            <section>
-                                <h2>ご祝儀・会費について</h2> <input type="hidden" name="gmo_pay_token"> <input type="hidden"
-                                    name="payment_at" value="kaihi">
-                                <p class="fee-remarks">ご列席の皆様のご負担や当日の混雑を避けるべく<br>
-                                    ご祝儀の事前受付を可能といたしました<br> <br>
-                                    当日会場にお持ちいただくことも可能ですが<br>
-                                    受付でのご祝儀の受け渡しが不要となりますので<br>
-                                    よろしければ事前受付をご利用ください</p>
-                                <!---->
-                                <div id="credit_select" class="pay-method"><label
-                                        class="form-input-radio-wrapper"><input type="radio" name="use_credit_card"
-                                            value="1"><span>クレジットカードで事前受付</span></label></div>
-                                <div class="credit-card-area js-credit-card-area"><input type="hidden"
-                                        name="ticket_amount" value="0">
-                                    <ul id="credit_ticket" class="ticket-container"></ul>
-                                    <!---->
-                                    <div class="ticket-amount"><strong>0</strong> <span>&nbsp;円</span></div>
-                                    <div>
-                                        <div id="credit_card_no"><label class="list-label">
-                                                クレジットカード番号<br>
-                                                <img src="./Answer_files/logo_visa.gif" class="card-logo">
-                                                <img src="./Answer_files/logo_mastercard.gif" class="card-logo">
-                                                <img src="./Answer_files/logo_jcb.gif" class="card-logo">
-                                                <img src="./Answer_files/logo_amex.gif" class="card-logo">
-                                                <img src="./Answer_files/logo_diners.gif" class="card-logo"></label>
-                                            <div class="credit-card-input-wrapper">
-                                                <input type="tel" name="card_no" autocomplete="cc-number"
-                                                    placeholder="1111222233334444" maxlength="16">
-                                                <!---->
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <label class="list-label">有効期限</label>
-                                            <div class="limit-date-container">
-                                                <span class="dropdown">
-                                                    <select name="expire_month" autocomplete="cc-exp-month">
-                                                        <option value="01">01</option>
-                                                        <option value="02">02</option>
-                                                        <option value="03">03</option>
-                                                        <option value="04">04</option>
-                                                        <option value="05">05</option>
-                                                        <option value="06">06</option>
-                                                        <option value="07">07</option>
-                                                        <option value="08">08</option>
-                                                        <option value="09">09</option>
-                                                        <option value="10">10</option>
-                                                        <option value="11">11</option>
-                                                        <option value="12">12</option>
-                                                    </select></span> <span class="divider">/</span> <span
-                                                    class="dropdown">
-                                                    <select name="expire_year" autocomplete="cc-exp-year">
-                                                        <option value="22">2022</option>
-                                                        <option value="23">2023</option>
-                                                        <option value="24">2024</option>
-                                                        <option value="25">2025</option>
-                                                        <option value="26">2026</option>
-                                                        <option value="27">2027</option>
-                                                        <option value="28">2028</option>
-                                                        <option value="29">2029</option>
-                                                        <option value="30">2030</option>
-                                                        <option value="31">2031</option>
-                                                        <option value="32">2032</option>
-                                                        <option value="33">2033</option>
-                                                        <option value="34">2034</option>
-                                                        <option value="35">2035</option>
-                                                        <option value="36">2036</option>
-                                                        <option value="37">2037</option>
-                                                        <option value="38">2038</option>
-                                                        <option value="39">2039</option>
-                                                        <option value="40">2040</option>
-                                                        <option value="41">2041</option>
-                                                        <option value="42">2042</option>
-                                                        <option value="43">2043</option>
-                                                    </select></span>
-                                            </div>
-                                        </div>
-                                        <div><label class="list-label">セキュリティコード <span
-                                                    id="tooltip_security_code_trigger" class="arrow" tabindex="0"><svg
-                                                        class="icon icon-question">
-                                                        <use xlink:href="#icon-question"></use>
-                                                    </svg></span></label>
-                                            <div id="tooltip_security_code_content" style="display: none;"><img
-                                                    src="./Answer_files/security_code.png" alt="セキュリティコード"></div>
-                                            <div class="credit-card-input-wrapper"><input type="tel"
-                                                    name="security_code" autocomplete="cc-csc" placeholder="123"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="pay-method"><label class="form-input-radio-wrapper"><input type="radio"
-                                            name="use_credit_card" value="0"><span>そのまま回答を完了する</span></label></div>
-                                <!---->
-                                <div class="confirm_button"><a href="javascript:void(0)" class="button">回答する</a></div>
-                                <div class="back_link"><a href="javascript:void(0)" class="arrow"><svg
-                                            class="icon icon-circle-left">
-                                            <use xlink:href="#icon-circle-left"></use>
-                                        </svg> 戻る</a></div>
+                                        </svg><span id="edit_id"> 修正</span></a></div>
                             </section>
                         </section>
                     </div>
@@ -813,76 +746,169 @@
             <div class="main_footer"></div>
         </main>
         <script src="./Answer_files/token.js.download" type="text/javascript" charset="UTF-8"></script>
-        <!-- <footer class="footer">
-            <a href="https://weddingday.jp/?top=from_invitation" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 664.28 113.6">
-                    <title>Canh&Linh</title>
-                    <desc></desc>
-                    <path class="cls-1"
-                        d="M235.29,5h4.2q-7.8,18.41-15.5,36.6l-15.5,36.6-17.7-41.7-.9-2.7q-4,11.1-8.95,22.3t-9.65,22.1q-7.8-18.4-15.5-36.6L140.29,5h4.2l12.9,30.6q6.39,15.19,13,30.5c.13.47.28.93.45,1.4s.31.93.45,1.4q3.39-10,7.85-19.9t8.65-19.7q-2.61-6.19-5.15-12.2L177.49,5h4.3q6.39,15.41,12.8,30.6t13,30.5c.13.47.28.93.45,1.4s.31.93.45,1.4c.13-.47.28-.93.45-1.4s.31-.93.45-1.4q6.6-15.4,13-30.55T235.29,5Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M276.78,50.7q-7.78,3.11-15.5,6.15L245.78,63a14.33,14.33,0,0,0,5.4,6.2,15.88,15.88,0,0,0,14.2,1.3,14.19,14.19,0,0,0,4.71-3.1c.46.53.9,1,1.29,1.55s.84,1,1.3,1.55a20.1,20.1,0,0,1-5.9,3.8,18.26,18.26,0,0,1-7.19,1.4,19,19,0,0,1-7.66-1.55A20.39,20.39,0,0,1,245.74,70a19.39,19.39,0,0,1-4.21-6.15,19.65,19.65,0,0,1,0-15.25,19.28,19.28,0,0,1,4.21-6.2,20.39,20.39,0,0,1,6.19-4.15,19,19,0,0,1,7.66-1.55,15.5,15.5,0,0,1,5.69,1,18,18,0,0,1,5,2.9,19.84,19.84,0,0,1,3.94,4.4A20.1,20.1,0,0,1,276.78,50.7Zm-17.19-10a15.64,15.64,0,0,0-5.71,1,14.35,14.35,0,0,0-4.7,3,15.63,15.63,0,0,0-4.8,9.8,18.53,18.53,0,0,0,0,2.35,15,15,0,0,0,.25,2.25q6.69-2.7,13.4-5.35l13.5-5.35a14.32,14.32,0,0,0-4.9-5.55A12.34,12.34,0,0,0,259.59,40.7Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M288.28,56.2a19.2,19.2,0,0,1,1.5-7.55,19.4,19.4,0,0,1,4.15-6.2,19.75,19.75,0,0,1,6.25-4.2,19.33,19.33,0,0,1,7.7-1.55,17.81,17.81,0,0,1,5.6.85,20.33,20.33,0,0,1,4.7,2.2,17.17,17.17,0,0,1,3.6,3,10.49,10.49,0,0,1,2.1,3.4c-.06-.73-.13-1.48-.2-2.25s-.13-1.52-.2-2.25V0h4.1V75h-3.7V66.3a10.82,10.82,0,0,1-2.05,3.4,16.3,16.3,0,0,1-3.5,3,17.64,17.64,0,0,1-4.7,2.15,19.88,19.88,0,0,1-5.75.8,19.33,19.33,0,0,1-7.7-1.55A20.31,20.31,0,0,1,293.93,70a18.75,18.75,0,0,1-4.15-6.15A19.47,19.47,0,0,1,288.28,56.2Zm4.2,0a15.09,15.09,0,0,0,1.2,6,16,16,0,0,0,3.25,4.9,15,15,0,0,0,4.85,3.3,15.33,15.33,0,0,0,6.1,1.2A15.69,15.69,0,0,0,314,70.4a15.29,15.29,0,0,0,8.25-8.2,15.09,15.09,0,0,0,1.2-6A15.3,15.3,0,0,0,314,41.9a15.69,15.69,0,0,0-6.15-1.2,15.33,15.33,0,0,0-6.1,1.2,15,15,0,0,0-4.85,3.3,15.88,15.88,0,0,0-3.25,4.95A15.44,15.44,0,0,0,292.48,56.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M340.68,56.2a19.2,19.2,0,0,1,1.5-7.55,19.4,19.4,0,0,1,4.15-6.2,19.75,19.75,0,0,1,6.25-4.2,19.33,19.33,0,0,1,7.7-1.55,17.81,17.81,0,0,1,5.6.85,20.33,20.33,0,0,1,4.7,2.2,17.17,17.17,0,0,1,3.6,3,10.49,10.49,0,0,1,2.1,3.4c-.06-.73-.13-1.48-.2-2.25s-.13-1.52-.2-2.25V0H380V75h-3.7V66.3a10.82,10.82,0,0,1-2,3.4,16.3,16.3,0,0,1-3.5,3A17.64,17.64,0,0,1,366,74.9a19.88,19.88,0,0,1-5.75.8,19.33,19.33,0,0,1-7.7-1.55A20.31,20.31,0,0,1,346.33,70a18.75,18.75,0,0,1-4.15-6.15A19.47,19.47,0,0,1,340.68,56.2Zm4.2,0a15.09,15.09,0,0,0,1.2,6,16,16,0,0,0,3.25,4.9,15,15,0,0,0,4.85,3.3,15.33,15.33,0,0,0,6.1,1.2,15.69,15.69,0,0,0,6.15-1.2,15.29,15.29,0,0,0,8.25-8.2,15.09,15.09,0,0,0,1.2-6,15.3,15.3,0,0,0-9.45-14.3,15.69,15.69,0,0,0-6.15-1.2,15.33,15.33,0,0,0-6.1,1.2,15,15,0,0,0-4.85,3.3,15.88,15.88,0,0,0-3.25,4.95A15.44,15.44,0,0,0,344.88,56.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M394.08,24.2a3.1,3.1,0,0,1,1-2.35,3.26,3.26,0,0,1,4.6,0,3.26,3.26,0,0,1,0,4.7,3.26,3.26,0,0,1-4.6,0A3.1,3.1,0,0,1,394.08,24.2Zm5.3,50.8h-4.1V37.5h4.1Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M416.78,37.5h3.8v6.6c0,.93,0,2,.1,3.1a16.85,16.85,0,0,1,6.4-7.6,17.79,17.79,0,0,1,10-2.9q5.51,0,8.7,3.1a11.46,11.46,0,0,1,3.4,8.1V75H445V49a9,9,0,0,0-2.35-5.6,8.66,8.66,0,0,0-6.35-2.6,16.4,16.4,0,0,0-5.8,1.05,16.14,16.14,0,0,0-4.9,2.85,13.55,13.55,0,0,0-3.35,4.3A12.18,12.18,0,0,0,421,54.5V75h-4.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M496.88,37.5h3.4v41a24.74,24.74,0,0,1-1.5,8.85,20.59,20.59,0,0,1-4.1,6.75,17.86,17.86,0,0,1-6.05,4.3,19.79,19.79,0,0,1-7.45,1.6,27.31,27.31,0,0,1-8.45-1.6,17.1,17.1,0,0,1-7-4.4c.53-.53,1-1,1.5-1.55s1-1,1.5-1.55a13.56,13.56,0,0,0,5.6,3.6,20.06,20.06,0,0,0,6.7,1.2,14,14,0,0,0,5.85-1.25,13.79,13.79,0,0,0,4.75-3.55,17.69,17.69,0,0,0,3.2-5.55,20.51,20.51,0,0,0,1.2-7.15V71c.07-.73.13-1.5.2-2.3s.13-1.57.2-2.3a14.63,14.63,0,0,1-5.75,6.4,18.62,18.62,0,0,1-10.15,2.9,19.33,19.33,0,0,1-7.7-1.55A20.31,20.31,0,0,1,466.63,70a19.2,19.2,0,0,1-4.2-6.15,19,19,0,0,1-1.55-7.65,18.72,18.72,0,0,1,1.55-7.55,19.69,19.69,0,0,1,10.45-10.4,19.33,19.33,0,0,1,7.7-1.55,17.49,17.49,0,0,1,5.5.85,20.53,20.53,0,0,1,4.7,2.2,15.31,15.31,0,0,1,3.55,3.1,13.7,13.7,0,0,1,2.15,3.45c0-1.47,0-2.93.15-4.4S496.81,39,496.88,37.5Zm-31.8,18.7a15.09,15.09,0,0,0,1.2,6,15.82,15.82,0,0,0,3.25,4.9,14.8,14.8,0,0,0,4.9,3.3,15.69,15.69,0,0,0,6.15,1.2,15.38,15.38,0,0,0,14.3-9.4,15.09,15.09,0,0,0,1.2-6,15.35,15.35,0,0,0-15.5-15.5,15.69,15.69,0,0,0-6.15,1.2,14.8,14.8,0,0,0-4.9,3.3,15.7,15.7,0,0,0-3.25,4.95A15.44,15.44,0,0,0,465.08,56.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M513.08,56.2a19.37,19.37,0,0,1,5.65-13.75,19.64,19.64,0,0,1,6.25-4.2,19.3,19.3,0,0,1,7.7-1.55,17.81,17.81,0,0,1,5.6.85,20.53,20.53,0,0,1,4.7,2.2,17.17,17.17,0,0,1,3.6,3,10.49,10.49,0,0,1,2.1,3.4c-.07-.73-.13-1.48-.2-2.25s-.14-1.52-.2-2.25V0h4.1V75h-3.7V66.3a11,11,0,0,1-2,3.4,16.79,16.79,0,0,1-3.5,3,17.93,17.93,0,0,1-4.7,2.15,20,20,0,0,1-5.75.8,19.3,19.3,0,0,1-7.7-1.55A20.19,20.19,0,0,1,518.73,70a18.6,18.6,0,0,1-4.15-6.15A19.47,19.47,0,0,1,513.08,56.2Zm4.2,0a15.09,15.09,0,0,0,1.2,6,15.82,15.82,0,0,0,3.25,4.9,14.8,14.8,0,0,0,4.85,3.3,15.3,15.3,0,0,0,6.1,1.2,15.69,15.69,0,0,0,6.15-1.2,15.29,15.29,0,0,0,8.25-8.2,15.09,15.09,0,0,0,1.2-6,15.3,15.3,0,0,0-9.45-14.3,15.69,15.69,0,0,0-6.15-1.2,15.3,15.3,0,0,0-6.1,1.2,14.8,14.8,0,0,0-4.85,3.3,15.7,15.7,0,0,0-3.25,4.95A15.44,15.44,0,0,0,517.28,56.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M565.08,56.2a18.55,18.55,0,0,1,1.55-7.55,19.87,19.87,0,0,1,4.2-6.2,19.64,19.64,0,0,1,6.25-4.2,19.3,19.3,0,0,1,7.7-1.55,17.54,17.54,0,0,1,5.5.85,20.53,20.53,0,0,1,4.7,2.2,15.31,15.31,0,0,1,3.55,3.1,14,14,0,0,1,2.15,3.45c0-1.47.05-2.93.15-4.4s.18-2.93.25-4.4h3.4V75h-3.8V70.5c0-.73,0-1.43.05-2.1s0-1.37,0-2.1a11,11,0,0,1-2,3.4,16.79,16.79,0,0,1-3.5,3,17.93,17.93,0,0,1-4.7,2.15,20,20,0,0,1-5.75.8,19.3,19.3,0,0,1-7.7-1.55A20.19,20.19,0,0,1,570.83,70a19.2,19.2,0,0,1-4.2-6.15A18.82,18.82,0,0,1,565.08,56.2Zm4.2,0a15.09,15.09,0,0,0,1.2,6,15.82,15.82,0,0,0,3.25,4.9,14.7,14.7,0,0,0,4.9,3.3,15.69,15.69,0,0,0,6.15,1.2,15.33,15.33,0,0,0,6.1-1.2,15.42,15.42,0,0,0,8.2-8.2,15.09,15.09,0,0,0,1.2-6,15.35,15.35,0,0,0-15.5-15.5,15.69,15.69,0,0,0-6.15,1.2,14.7,14.7,0,0,0-4.9,3.3,15.7,15.7,0,0,0-3.25,4.95A15.44,15.44,0,0,0,569.28,56.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M625.18,100h-4.4q3.09-6.19,6.2-12.35t6.2-12.45q-4.8-9.4-9.45-18.8t-9.45-18.9h4.4q4.2,8.4,8.6,16.8t8.1,16.9q3.79-8.51,8.15-16.9t8.55-16.8h4.4q-7.8,15.7-15.6,31.25T625.18,100Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M107.44,91.78A55.7,55.7,0,0,0,95.38,73.87a58.15,58.15,0,0,0-17.89-12,53.12,53.12,0,0,0-15.82-4.11L80.28,38.38,68.47,27.93l-25.4.35L31.55,39.06,50.47,57.65a52,52,0,0,0-16.55,4.18,56.18,56.18,0,0,0-29.52,30A54.84,54.84,0,0,0,0,113.56v0H7.53v0a47.88,47.88,0,0,1,3.75-18.91,49,49,0,0,1,10.3-15.44A50.84,50.84,0,0,1,36.89,68.65a45.13,45.13,0,0,1,18.73-3.94,45.21,45.21,0,0,1,18.74,3.94,50.44,50.44,0,0,1,25.75,26A46.13,46.13,0,0,1,104,113.57v0h7.82v0A55,55,0,0,0,107.44,91.78Z">
-                    </path>
-                    <path class="cls-1" d="M55.93,17.45a2,2,0,0,1-2-2V2.27a2,2,0,0,1,4,0V15.45A2,2,0,0,1,55.93,17.45Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M37.23,22.45a2,2,0,0,1-1.6-.79L27.69,11.13a2,2,0,1,1,3.19-2.41l7.94,10.53a2,2,0,0,1-1.59,3.2Z">
-                    </path>
-                    <path class="cls-1"
-                        d="M74.84,22.45a2,2,0,0,1-1.59-3.2L81.19,8.72a2,2,0,0,1,3.19,2.41L76.44,21.66A2,2,0,0,1,74.84,22.45Z">
-                    </path>
-                </svg>
-            </a>
-        </footer> -->
     </div>
     <script type="application/json" data-roll="is_preview">false</script>
 
     <script src="./Answer_files/promise-7.0.4.min.js.download"></script>
     <script src="./Answer_files/formdata.min.js.download"></script>
     <script src="./Answer_files/app.js.download"></script>
+ <!-- jQuery library -->
+ <script src="./common/jquery.min.js"></script>
+
+ <!-- Popper JS -->
+ <script src="./common/popper.min.js"></script>
+
+ <!-- Latest compiled JavaScript -->
+ <script src="./common/constant.js"></script>
+ <script src="./common/common.js"></script>
+ <script src="./common/language.js"></script>
+ <!-- <script type="module" src="./common/import.js">
+ </script> -->
 
     <!--パートナー専用テンプレートのjs読み込み-->
-    <script>
+    <script type="module">
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-app.js";
+        import { getFirestore, getDocs, collection, addDoc,serverTimestamp  } from  'https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js'
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDlWfZln2LZrMCxZvSSYnOd6hfKqUyFK14",
+            authDomain: "weddinggame-142eb.firebaseapp.com",
+            projectId: "weddinggame-142eb",
+            storageBucket: "weddinggame-142eb.appspot.com",
+            messagingSenderId: "404701559065",
+            appId: "1:404701559065:web:925448458c83805cdf2d88"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const ReadData = async () =>{
+            const querySnapshot = await getDocs(collection(db, "test"));
+            querySnapshot.forEach((doc) => {
+                console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+            });
+        }
+
+        const WriteData = async (data) =>{
+            try {
+                const docRef = await addDoc(collection(db, "test"), {
+                    ten: data.ten,
+                    thamgia: data.thamgia,
+                    mess: data.mess,
+                    createdAt: serverTimestamp()
+                });
+                console.log("Document written with ID: ", docRef.id);
+                return true;
+            } catch (e) {
+                console.error("Error adding document: ", e);
+                return false;
+            }
+        }
+
+        const XacNhanHoanTat = async  () =>{
+
+            var data = {}
+            data.ten = $("#hoten").text();
+            data.thamgia = $("#dihayko").text();
+            data.mess = $("#memo1").text();
+            var b = await WriteData(data);
+            if(b)
+            {
+                window.location.href = "./thanks.html";
+            } else{
+                return;
+            }
+        }
+
+        window.XacNhanHoanTat = XacNhanHoanTat;
+        window.ReadData = ReadData;
+</script>
+<!-- <script type="module" src="./common/import.js">
+</script> -->
+
+   <!--パートナー専用テンプレートのjs読み込み-->
+   <script>
         AOS.init();
+
+        $(document).ready(function () {
+            NGONNGU.refreshLang();
+            var list = document.getElementById('browsers');
+
+            ds.forEach(function(item){
+            var option = document.createElement('option');
+            option.value = item;
+            list.appendChild(option);
+            });
+        });
 
         const Traloicauhoi = () => {
 
             var dihayko = $("input[name='entry']:checked").val();
-            if(dihayko != null && $("#ho").val()!="" && $("#ten").val()!="" && $("#memo").val()!="")
+            var val = document.getElementById("browser").value;
+            var lang = NGONNGU.getObjLang();
+            var i = ds.indexOf(val);
+            if(dihayko == null)
             {
-                $("#dihayko").text(dihayko);
-                $("#hoten").text($("#ho").val()+" " + $("#ten").val());
-                $("#memo1").text($("#memo").val());
-                $('#traloi').hide();
-                $('#confirm').show();
+                alert(lang.erroraccept)
+                return;
+            }
+            if(i == -1)
+            {
+                alert(lang.errorlist)
+                return;
+            }
+
+            if(!(i== 21 || i==22 || i==23) && dihayko == "ご欠席")
+            {
+                alert("tham gia đi mà! ")
+                return;
+            }
+            var i = ds.indexOf(val);
+            $("#avatar2").attr("src",avatar[i]);
+            $("#dihayko").text(dihayko);
+            $("#hoten").text(val);
+            $("#memo1").text($("#memo").val());
+            $('#traloi').hide();
+            $('#confirm').show();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[type="checkbox"]');
+
+            checkbox.addEventListener('change', function () {
+                if (checkbox.checked) { 
+                NGONNGU.setLangDB(Language.JP);
+                // do this
+                console.log('Checked');
+                } else {
+                NGONNGU.setLangDB(Language.VN);
+                // do that
+                console.log('Not checked');
+                }
+                NGONNGU.refreshLang();
+            });
+        });
+
+        function onInput() {
+            var val = document.getElementById("browser").value;
+            var opts = document.getElementById('browsers').childNodes;
+            for (var i = 0; i < opts.length; i++) {
+            if (opts[i].value === val) {
+                // An item was selected from the list!
+                // yourCallbackHere()
+                // alert(opts[i].value);
+                var i = ds.indexOf(val);
+                $("#avatar").attr("src",avatar[i]);
+                break;
+            }
+            else{
+                $("#avatar").attr("src","./avatar/avatar.png");
+            }
             }
         }
     </script>
