@@ -11,7 +11,7 @@ const ds = [
     "Đăng Minh (Minh Fix)",
     "Hồng Uyên (Uyên Cherry)",
     "Mạnh Hùng (Hùng Cino)",
-    "Thùy Diễm (Mưa Sao Băng)",
+    "Thùy Diễm (Thím Đười)",
     "Minh Quân (阮明君)",
     "Hoài Thương (Pig Papy)",
     "Huỳnh Công Đức",
