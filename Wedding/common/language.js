@@ -44,7 +44,7 @@ const data = {
         "accepts_span":"<br/>Tham gia",
         "declines":"Nhất định tham gia",
         "declines_span":"<br/>Nhất định tham gia",
-        "name":"Vui lòng nhập tên có dấu*",
+        "name":"Tìm kiếm và chọn tên trong danh sách *",
         "name2":"Tên",
         "Message":"Tin nhắn",
         "Messageinf":"Gửi lời chúc đến hai đứa",
