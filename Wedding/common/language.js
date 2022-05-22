@@ -31,7 +31,7 @@ const data = {
     },
     "vn":{
         "wedding":"Huy Cảnh & Hạnh Linh",
-        "content":"Hé Lu mọi người<br><br>Cuối cùng sau 10 năm dài đằng đẵng tìm hiểu nhau.<br> Cũng như được sự đồng ý của 2 bên gia đình.<br>Bọn em đã quyết định chia tay với cuộc sống độc thân.<br>Nhân ngày lành tháng tốt mở một bữa tiệc nhỏ để mọi người có thể đến chung vui.<br>Rất mong sự có mặt của mọi người hôm đó.<br><br>Một lần nữa cho tụi em cảm ơn!",
+        "content":"Hé Lu mọi người<br><br>Cuối cùng sau 10 năm dài đằng đẵng tìm hiểu nhau.<br> Cũng như được sự đồng ý của 2 bên gia đình.<br>Bọn em đã quyết định chia tay với cuộc sống độc thân.<br>Nhân ngày lành tháng tốt mở một bữa tiệc nhỏ để mọi người có thể đến chung vui.<br>Rất mong sự có mặt của mọi người hôm đó!!<br><br>",
         "date": "Thời gian：Ngày 10/7/2022 (Chủ Nhật)",
         "checkin":"Đón Khách：11 giờ 00",
         "party":"Nhập Tiệc：12 giờ 00",
