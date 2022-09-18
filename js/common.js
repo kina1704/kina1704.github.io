@@ -53,7 +53,9 @@ class User {
             , { ID: 9, name: "Thư", avatar: 'thu.png', isBoss: 1 }
             , { ID: 10, name: "Uyên", avatar: 'uyen.png', isBoss: 1 }
             , { ID: 11, name: "Diễm", avatar: 'diem.png', isBoss: 1 }
-            , { ID: 12, name: "Trân", avatar: 'tran.png', isBoss: 1 }];
+            , { ID: 12, name: "Trân", avatar: 'tran.png', isBoss: 1 }
+            , { ID: 13, name: "MinTeHe", avatar: 'mintehe.png', isBoss: 1 }
+            , { ID: 14, name: "TrieuDa", avatar: 'trieuda.png', isBoss: 1 }];
             this.setUserDB(UserDB);
     }
 
