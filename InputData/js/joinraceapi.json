@@ -1,0 +1,13 @@
+{
+    "race": {
+        "getraces": "races",
+        "availablehorses": "user/available-horses?raceId",
+        "joinrace": "enter"
+    },
+    "user":{
+        "login":"auth/login"
+    },
+    "market":"lending/market",
+    "lending":"lending",
+    "rent":"rent"
+}
